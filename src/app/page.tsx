@@ -3,11 +3,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import Resume from "@/components/Resume";
-import CustomizationPanel from "@/components/CustomizationPanel";
+import CustomizationSidebar from "@/components/CustomizationSidebar";
+import QuickCustomizer from "@/components/QuickCustomizer";
+import CustomizationToast from "@/components/CustomizationToast";
+import ReleaseNotesModal from "@/components/ReleaseNotesModal";
 import PDFInstructions from "@/components/PDFInstructions";
 import { ResumeData } from "@/types/resume";
 import { CustomizationSettings, DEFAULT_CUSTOMIZATION } from "@/types/customization";
 import { DEFAULT_RESUME } from "@/constants/defaultResume";
+import { APP_VERSION, isNewVersion } from "@/constants/version";
 import {
   saveResumeToStorage,
   loadResumeFromStorage,
@@ -24,11 +28,15 @@ export default function Home() {
   const [customization, setCustomization] = useState<CustomizationSettings>(DEFAULT_CUSTOMIZATION);
   const [isMounted, setIsMounted] = useState(false);
   const [showSaveNotification, setShowSaveNotification] = useState(false);
-  const [showCustomizationPanel, setShowCustomizationPanel] = useState(false);
+  const [isCustomizationOpen, setIsCustomizationOpen] = useState(false);
   const [showPDFInstructions, setShowPDFInstructions] = useState(false);
   const [showLoadNotification, setShowLoadNotification] = useState(false);
+  const [showReleaseNotes, setShowReleaseNotes] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
   const resumeRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const prevCustomizationRef = useRef<CustomizationSettings>(customization);
 
   // Load data from storage on mount
   useEffect(() => {
@@ -47,7 +55,63 @@ export default function Home() {
       setCustomization(savedCustomization);
       console.log("✅ Customization loaded from localStorage");
     }
+
+    // Check if this is a new version
+    const lastSeenVersion = localStorage.getItem("cvgen_last_version");
+    if (isNewVersion(lastSeenVersion)) {
+      // Show release notes for new version
+      setTimeout(() => setShowReleaseNotes(true), 1500);
+      localStorage.setItem("cvgen_last_version", APP_VERSION);
+    }
   }, []);
+
+  // Detect customization changes and show toast
+  useEffect(() => {
+    if (isMounted && prevCustomizationRef.current) {
+      const prev = prevCustomizationRef.current;
+      const current = customization;
+
+      let changeMessage = "";
+
+      if (prev.preset !== current.preset && current.preset) {
+        changeMessage = `Layout: ${current.preset.charAt(0).toUpperCase() + current.preset.slice(1)}`;
+      } else if (prev.theme?.name !== current.theme?.name && current.theme?.name) {
+        changeMessage = `Theme: ${current.theme.name}`;
+      } else if (prev.fontFamily !== current.fontFamily && current.fontFamily) {
+        changeMessage = `Font: ${current.fontFamily}`;
+      } else if (prev.headerStyle !== current.headerStyle && current.headerStyle) {
+        changeMessage = `Header: ${current.headerStyle.charAt(0).toUpperCase() + current.headerStyle.slice(1)}`;
+      } else if (prev.showIcons !== current.showIcons) {
+        changeMessage = `Icons: ${current.showIcons ? "ON" : "OFF"}`;
+      } else if (prev.bulletStyle !== current.bulletStyle && current.bulletStyle) {
+        changeMessage = `Bullets: ${current.bulletStyle.charAt(0).toUpperCase() + current.bulletStyle.slice(1)}`;
+      } else if (prev.headingCase !== current.headingCase && current.headingCase) {
+        changeMessage = `Heading Case: ${current.headingCase.charAt(0).toUpperCase() + current.headingCase.slice(1)}`;
+      } else if (prev.showDividers !== current.showDividers) {
+        changeMessage = `Dividers: ${current.showDividers ? "ON" : "OFF"}`;
+      } else if (prev.accentColor !== current.accentColor && current.accentColor) {
+        changeMessage = `Accent Color Updated`;
+      } else if (
+        prev.fontSize?.name !== current.fontSize?.name ||
+        prev.fontSize?.heading !== current.fontSize?.heading ||
+        prev.fontSize?.body !== current.fontSize?.body
+      ) {
+        changeMessage = "Font Size Adjusted";
+      } else if (
+        prev.spacing?.section !== current.spacing?.section ||
+        prev.spacing?.pageMargin !== current.spacing?.pageMargin
+      ) {
+        changeMessage = "Spacing Adjusted";
+      }
+
+      if (changeMessage) {
+        setToastMessage(changeMessage);
+        setShowToast(true);
+      }
+
+      prevCustomizationRef.current = current;
+    }
+  }, [customization, isMounted]);
 
   // Auto-save to localStorage on data change
   useEffect(() => {
@@ -126,14 +190,14 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen gradient-bg py-8">
+    <main className="min-h-screen gradient-bg py-8 pb-40">
 
       {/* Two Column Layout */}
       <div className="max-w-[120rem] mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 xl:grid-cols-[450px_1fr] gap-6 items-start">
           
           {/* LEFT COLUMN - Controls & Actions */}
-          <div className="no-print space-y-6 xl:sticky xl:top-8">
+          <div className="no-print space-y-6 xl:sticky xl:top-8 pb-4 xl:pb-0">
             <div className="glass rounded-2xl shadow-2xl p-6 animate-fadeIn">
               {/* Hero Section */}
               <div className="text-center mb-6">
@@ -183,13 +247,16 @@ export default function Home() {
               {/* Action Buttons */}
               <div className="space-y-3">
                 <button
-                  onClick={() => setShowCustomizationPanel(true)}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
+                  onClick={() => setIsCustomizationOpen(!isCustomizationOpen)}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 relative"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                   </svg>
-                  <span>Customize</span>
+                  <span>{isCustomizationOpen ? 'Close' : 'Customize'}</span>
+                  <span className="absolute -top-1 -right-1 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-0.5 rounded-full animate-pulse">
+                    NEW
+                  </span>
                 </button>
 
                 <button
@@ -284,6 +351,17 @@ export default function Home() {
                 <span className="hover:text-white transition-colors cursor-pointer">⚡ Fast</span>
                 <span className="hover:text-white transition-colors cursor-pointer">🔒 Private</span>
               </div>
+              <div className="mt-4 pt-4 border-t border-gray-700">
+                <button
+                  onClick={() => setShowReleaseNotes(true)}
+                  className="text-xs text-gray-400 hover:text-white transition-colors flex items-center justify-center gap-1 mx-auto"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>v{APP_VERSION} - What's New?</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -300,14 +378,34 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Customization Panel */}
-      {showCustomizationPanel && (
-        <CustomizationPanel
-          settings={customization}
-          onUpdate={setCustomization}
-          onClose={() => setShowCustomizationPanel(false)}
-        />
-      )}
+      {/* Quick Customizer Toolbar */}
+      <QuickCustomizer
+        settings={customization}
+        onUpdate={setCustomization}
+        onOpenFullPanel={() => setIsCustomizationOpen(true)}
+      />
+
+      {/* Customization Sidebar */}
+      <CustomizationSidebar
+        settings={customization}
+        onUpdate={setCustomization}
+        isOpen={isCustomizationOpen}
+        onToggle={() => setIsCustomizationOpen(!isCustomizationOpen)}
+      />
+
+      {/* Customization Toast */}
+      <CustomizationToast
+        message={toastMessage}
+        visible={showToast}
+        onHide={() => setShowToast(false)}
+      />
+
+      {/* Release Notes Modal */}
+      <ReleaseNotesModal
+        isOpen={showReleaseNotes}
+        onClose={() => setShowReleaseNotes(false)}
+        version={APP_VERSION}
+      />
 
       {/* PDF Instructions Modal */}
       {showPDFInstructions && (

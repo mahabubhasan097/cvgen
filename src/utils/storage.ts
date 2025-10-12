@@ -1,5 +1,5 @@
 import { ResumeData } from "@/types/resume";
-import { CustomizationSettings } from "@/types/customization";
+import { CustomizationSettings, DEFAULT_CUSTOMIZATION } from "@/types/customization";
 
 const STORAGE_KEY = "cvgen_resume_data";
 const CUSTOMIZATION_KEY = "cvgen_customization";
@@ -82,7 +82,20 @@ export const saveCustomizationToStorage = (
 export const loadCustomizationFromStorage = (): CustomizationSettings | null => {
   try {
     const data = localStorage.getItem(CUSTOMIZATION_KEY);
-    return data ? JSON.parse(data) : null;
+    if (!data) return null;
+    
+    const savedSettings = JSON.parse(data);
+    
+    // Merge with defaults to ensure all new properties exist (backward compatibility)
+    return {
+      ...DEFAULT_CUSTOMIZATION,
+      ...savedSettings,
+      fontSize: { ...DEFAULT_CUSTOMIZATION.fontSize, ...savedSettings.fontSize },
+      spacing: { ...DEFAULT_CUSTOMIZATION.spacing, ...savedSettings.spacing },
+      lineHeight: { ...DEFAULT_CUSTOMIZATION.lineHeight, ...savedSettings.lineHeight },
+      theme: { ...DEFAULT_CUSTOMIZATION.theme, ...savedSettings.theme },
+      sections: savedSettings.sections || DEFAULT_CUSTOMIZATION.sections,
+    };
   } catch (error) {
     console.error("Failed to load customization from storage:", error);
     return null;

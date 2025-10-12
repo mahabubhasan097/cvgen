@@ -23,7 +23,7 @@ const ResumeSection: React.FC<ResumeSectionProps> = ({
   const getHeaderStyle = (): React.CSSProperties => {
     const baseStyle: React.CSSProperties = {
       fontSize: `${customization.fontSize.heading}px`,
-      color: customization.theme.primary,
+      color: customization.accentColor || customization.theme.primary,
       paddingBottom: "4px",
       marginBottom: `${customization.spacing.line}px`,
     };
@@ -32,12 +32,12 @@ const ResumeSection: React.FC<ResumeSectionProps> = ({
       case "underline":
         return {
           ...baseStyle,
-          borderBottom: `2px solid ${customization.theme.border}`,
+          borderBottom: `${customization.borderWidth}px solid ${customization.accentColor || customization.theme.border}`,
         };
       case "background":
         return {
           ...baseStyle,
-          backgroundColor: customization.theme.primary,
+          backgroundColor: customization.accentColor || customization.theme.primary,
           color: "white",
           padding: "8px 12px",
           marginBottom: `${customization.spacing.line * 2}px`,
@@ -45,7 +45,7 @@ const ResumeSection: React.FC<ResumeSectionProps> = ({
       case "border":
         return {
           ...baseStyle,
-          border: `2px solid ${customization.theme.border}`,
+          border: `${customization.borderWidth}px solid ${customization.accentColor || customization.theme.border}`,
           padding: "6px 12px",
           marginBottom: `${customization.spacing.line * 2}px`,
         };
@@ -54,15 +54,35 @@ const ResumeSection: React.FC<ResumeSectionProps> = ({
     }
   };
 
+  const getTextTransform = (): React.CSSProperties["textTransform"] => {
+    switch (customization.headingCase) {
+      case "uppercase":
+        return "uppercase";
+      case "capitalize":
+        return "capitalize";
+      case "normal":
+      default:
+        return "none";
+    }
+  };
+
   return (
     <section className={className} style={style}>
       <h2
-        className="font-bold uppercase tracking-wide"
-        style={getHeaderStyle()}
+        className="font-bold tracking-wide"
+        style={{ ...getHeaderStyle(), textTransform: getTextTransform() }}
       >
         {title}
       </h2>
       <div>{children}</div>
+      {customization.showDividers && (
+        <div 
+          className="mt-4"
+          style={{ 
+            borderBottom: `1px solid ${customization.theme.border}20`,
+          }} 
+        />
+      )}
     </section>
   );
 };
