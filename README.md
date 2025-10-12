@@ -4,6 +4,9 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black.svg)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg)](https://www.typescriptlang.org/)
+[![Live Demo](https://img.shields.io/badge/demo-live-success.svg)](https://cvgen-ecru.vercel.app/)
+
+**🌐 Live Demo**: [https://cvgen-ecru.vercel.app/](https://cvgen-ecru.vercel.app/)
 
 A modern, production-grade resume builder with powerful customization features. Create beautiful, ATS-friendly resumes with inline editing, instant PDF download, and advanced styling options.
 
@@ -77,6 +80,11 @@ A modern, production-grade resume builder with powerful customization features. 
 - Modern web browser
 
 ## 🚀 Quick Start
+
+### Try It Live
+**No installation needed!** Try CVGen now: **[https://cvgen-ecru.vercel.app/](https://cvgen-ecru.vercel.app/)**
+
+### Local Development
 
 ```bash
 # Install dependencies
