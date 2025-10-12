@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import Resume from "@/components/Resume";
 import CustomizationPanel from "@/components/CustomizationPanel";
+import PDFInstructions from "@/components/PDFInstructions";
 import { ResumeData } from "@/types/resume";
 import { CustomizationSettings, DEFAULT_CUSTOMIZATION } from "@/types/customization";
 import { DEFAULT_RESUME } from "@/constants/defaultResume";
@@ -24,6 +25,8 @@ export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
   const [showSaveNotification, setShowSaveNotification] = useState(false);
   const [showCustomizationPanel, setShowCustomizationPanel] = useState(false);
+  const [showPDFInstructions, setShowPDFInstructions] = useState(false);
+  const [showLoadNotification, setShowLoadNotification] = useState(false);
   const resumeRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -33,10 +36,16 @@ export default function Home() {
     const savedData = loadResumeFromStorage();
     if (savedData) {
       setResumeData(savedData);
+      setShowLoadNotification(true);
+      console.log("✅ Resume data loaded from localStorage");
+      setTimeout(() => setShowLoadNotification(false), 4000);
+    } else {
+      console.log("ℹ️ No saved data found, using default template");
     }
     const savedCustomization = loadCustomizationFromStorage();
     if (savedCustomization) {
       setCustomization(savedCustomization);
+      console.log("✅ Customization loaded from localStorage");
     }
   }, []);
 
@@ -45,6 +54,7 @@ export default function Home() {
     if (isMounted) {
       saveResumeToStorage(resumeData);
       saveCustomizationToStorage(customization);
+      console.log("💾 Auto-saved to localStorage");
       setShowSaveNotification(true);
       const timer = setTimeout(() => setShowSaveNotification(false), 2000);
       return () => clearTimeout(timer);
@@ -68,13 +78,8 @@ export default function Home() {
     `,
   });
 
-  const handleDownloadPDF = async () => {
-    if (resumeRef.current) {
-      await generatePDF(
-        resumeRef.current,
-        `${resumeData.contact.fullName.replace(/\s+/g, "_")}_Resume.pdf`
-      );
-    }
+  const handleDownloadPDF = () => {
+    setShowPDFInstructions(true);
   };
 
   const handleReset = () => {
@@ -122,12 +127,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen gradient-bg py-8">
-      {/* Decorative Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-      </div>
 
       {/* Two Column Layout */}
       <div className="max-w-[120rem] mx-auto px-4 relative z-10">
@@ -138,7 +137,7 @@ export default function Home() {
             <div className="glass rounded-2xl shadow-2xl p-6 animate-fadeIn">
               {/* Hero Section */}
               <div className="text-center mb-6">
-                <h1 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mb-1">
+                <h1 className="text-4xl font-extrabold text-indigo-600 mb-1">
                   CVGen
                 </h1>
                 <p className="text-xs text-gray-600 font-medium">
@@ -146,19 +145,38 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="mb-6 text-center">
-                {showSaveNotification ? (
-                  <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium animate-scaleIn shadow-md">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Saved</span>
+              {/* Save Status Banner */}
+              <div className="mb-6">
+                {showLoadNotification ? (
+                  <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-4 text-center animate-scaleIn">
+                    <div className="flex items-center justify-center gap-2 text-blue-700 font-medium">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                      <span className="text-sm">Previous work restored! 🎉</span>
+                    </div>
                   </div>
                 ) : (
-                  <p className="text-sm text-gray-700 font-medium flex items-center justify-center gap-2">
-                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    Click text to edit • Auto-save
-                  </p>
+                  <div className="bg-green-50 border-2 border-green-200 rounded-xl p-4 text-center">
+                    {showSaveNotification ? (
+                      <div className="flex items-center justify-center gap-2 text-green-700 font-medium animate-scaleIn">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-sm">All changes saved!</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center gap-2 text-gray-700">
+                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        <div className="text-sm">
+                          <div className="font-semibold">Auto-Save Active 💾</div>
+                          <div className="text-xs text-gray-600">Safe to refresh anytime</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 )}
               </div>
 
@@ -166,68 +184,53 @@ export default function Home() {
               <div className="space-y-3">
                 <button
                   onClick={() => setShowCustomizationPanel(true)}
-                  className="group w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                   </svg>
-                  <span className="relative z-10">Customize</span>
+                  <span>Customize</span>
                 </button>
 
                 <button
                   onClick={handleDownloadPDF}
-                  className="group w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-cyan-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
                   </svg>
-                  <span className="relative z-10">Download PDF</span>
-                </button>
-
-                <button
-                  onClick={handlePrint}
-                  className="group w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                  </svg>
-                  <span className="relative z-10">Print</span>
+                  <span>Save as PDF</span>
+                  <span className="text-xs opacity-75">(with links)</span>
                 </button>
 
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={handleExport}
-                    className="group flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                    className="flex items-center justify-center gap-2 px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-emerald-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                     </svg>
-                    <span className="relative z-10">Export</span>
+                    <span>Export</span>
                   </button>
 
-                  <label className="group flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-pink-600 to-rose-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-pink-700 to-rose-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <label className="flex items-center justify-center gap-2 px-4 py-3 bg-pink-600 hover:bg-pink-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                     </svg>
-                    <span className="relative z-10">Import</span>
+                    <span>Import</span>
                     <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} className="hidden" />
                   </label>
                 </div>
 
                 <button
                   onClick={handleReset}
-                  className="group w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                   </svg>
-                  <span className="relative z-10">Reset</span>
+                  <span>Reset</span>
                 </button>
               </div>
             </div>
@@ -236,7 +239,7 @@ export default function Home() {
             <div className="glass rounded-2xl p-6 shadow-xl animate-fadeIn">
               <div className="flex items-start gap-3 mb-4">
                 <div className="flex-shrink-0">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
@@ -269,14 +272,14 @@ export default function Home() {
             </div>
 
             {/* Footer - in left column */}
-            <div className="glass-dark rounded-2xl p-6 backdrop-blur-lg text-center">
+            <div className="bg-gray-800 rounded-2xl p-6 text-center">
               <p className="text-white font-medium mb-2 text-base">
                 ✨ Built for IT Professionals ✨
               </p>
-              <p className="text-white/80 text-xs">
+              <p className="text-gray-300 text-xs">
                 Next.js 15 • ATS-Optimized • Free Forever
               </p>
-              <div className="flex flex-wrap justify-center gap-3 mt-4 text-xs text-white/70">
+              <div className="flex flex-wrap justify-center gap-3 mt-4 text-xs text-gray-400">
                 <span className="hover:text-white transition-colors cursor-pointer">🎨 Modern</span>
                 <span className="hover:text-white transition-colors cursor-pointer">⚡ Fast</span>
                 <span className="hover:text-white transition-colors cursor-pointer">🔒 Private</span>
@@ -303,6 +306,14 @@ export default function Home() {
           settings={customization}
           onUpdate={setCustomization}
           onClose={() => setShowCustomizationPanel(false)}
+        />
+      )}
+
+      {/* PDF Instructions Modal */}
+      {showPDFInstructions && (
+        <PDFInstructions
+          onClose={() => setShowPDFInstructions(false)}
+          onProceed={generatePDF}
         />
       )}
 

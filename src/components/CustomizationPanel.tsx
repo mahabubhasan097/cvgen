@@ -97,10 +97,10 @@ const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-scaleIn border border-purple-100">
+    <div className="no-print fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-scaleIn border border-gray-200">
         {/* Header */}
-        <div className="flex items-center justify-between p-8 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600">
+        <div className="flex items-center justify-between p-8 bg-indigo-600">
           <div>
             <h2 className="text-3xl font-bold text-white mb-1">Customize Resume</h2>
             <p className="text-white/80 text-sm">Make it uniquely yours ✨</p>
@@ -139,14 +139,14 @@ const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
               🎨 Theme & Colors
             </span>
             {activeTab === "theme" && (
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></div>
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-indigo-600 rounded-full"></div>
             )}
           </button>
           <button
             onClick={() => setActiveTab("sections")}
             className={`flex-1 px-6 py-4 font-semibold transition-all relative rounded-t-2xl ${
               activeTab === "sections"
-                ? "bg-white text-purple-600 shadow-lg -mb-px"
+                ? "bg-white text-indigo-600 shadow-lg -mb-px"
                 : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
             }`}
           >
@@ -154,14 +154,14 @@ const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
               📋 Sections
             </span>
             {activeTab === "sections" && (
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></div>
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-indigo-600 rounded-full"></div>
             )}
           </button>
           <button
             onClick={() => setActiveTab("spacing")}
             className={`flex-1 px-6 py-4 font-semibold transition-all relative rounded-t-2xl ${
               activeTab === "spacing"
-                ? "bg-white text-purple-600 shadow-lg -mb-px"
+                ? "bg-white text-indigo-600 shadow-lg -mb-px"
                 : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
             }`}
           >
@@ -169,7 +169,7 @@ const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
               📐 Typography
             </span>
             {activeTab === "spacing" && (
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></div>
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-indigo-600 rounded-full"></div>
             )}
           </button>
         </div>
@@ -403,10 +403,9 @@ const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
           </p>
           <button
             onClick={onClose}
-            className="group px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative z-10 flex items-center gap-2">
+            <span className="flex items-center gap-2">
               <svg
                 className="w-5 h-5"
                 fill="none"
