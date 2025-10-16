@@ -20,6 +20,15 @@ interface ResumeProps {
  */
 const Resume = forwardRef<HTMLDivElement, ResumeProps>(
   ({ data, onUpdate, isEditable = true, customization }, ref) => {
+    // Helper function to get effective header color
+    const getHeaderColor = () => {
+      // If accentColor is set to a custom value (not the theme's primary), use it
+      if (customization.accentColor && customization.accentColor !== customization.theme.primary) {
+        return customization.accentColor;
+      }
+      // Otherwise, use theme's primary color
+      return customization.theme.primary;
+    };
     const updateContact = (field: keyof typeof data.contact, value: string) => {
       onUpdate({
         ...data,
@@ -277,7 +286,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                           className="font-bold"
                           style={{ 
                             fontSize: `${customization.fontSize.subheading || customization.fontSize.body + 2}px`,
-                            color: customization.theme.colors?.textPrimary || customization.theme.text
+                            color: customization.accentColor || customization.theme.primary
                           }}
                           as="h3"
                         />
@@ -286,7 +295,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                           className="font-bold"
                           style={{ 
                             fontSize: `${customization.fontSize.subheading || customization.fontSize.body + 2}px`,
-                            color: customization.theme.colors?.textPrimary || customization.theme.text
+                            color: customization.accentColor || customization.theme.primary
                           }}
                         >
                           {exp.position}
@@ -303,7 +312,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                               className="inline-block font-semibold"
                               style={{ 
                                 fontSize: `${customization.fontSize.body}px`,
-                                color: customization.theme.colors?.textSecondary || customization.theme.secondary
+                                color: "#6B7280"
                               }}
                               as="span"
                             />
@@ -316,7 +325,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                               className="inline-block"
                               style={{ 
                                 fontSize: `${customization.fontSize.small || customization.fontSize.body}px`,
-                                color: customization.theme.colors?.textTertiary || customization.theme.text
+                                color: "#9CA3AF"
                               }}
                               as="span"
                             />
@@ -327,7 +336,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                               className="font-semibold"
                               style={{ 
                                 fontSize: `${customization.fontSize.body}px`,
-                                color: customization.theme.colors?.textSecondary || customization.theme.secondary
+                                color: "#6B7280"
                               }}
                             >
                               {exp.company}
@@ -336,7 +345,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                             <span
                               style={{ 
                                 fontSize: `${customization.fontSize.small || customization.fontSize.body}px`,
-                                color: customization.theme.colors?.textTertiary || customization.theme.text
+                                color: "#9CA3AF"
                               }}
                             >
                               {exp.location}
@@ -349,7 +358,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                       className="text-right ml-4"
                       style={{ 
                         fontSize: `${customization.fontSize.small || customization.fontSize.body}px`,
-                        color: customization.theme.colors?.textTertiary || customization.theme.text
+                        color: "#9CA3AF"
                       }}
                     >
                       {isEditable ? (
@@ -396,7 +405,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                         {(customization.bulletStyle === "arrow" || customization.bulletStyle === "chevron") && (
                           <span 
                             className="inline-block mr-2" 
-                            style={{ color: customization.accentColor || customization.theme.colors?.textSecondary || customization.theme.primary }}
+                            style={{ color: "#6B7280" }}
                           >
                             {customization.bulletStyle === "arrow" ? "→" : "›"}
                           </span>
@@ -488,7 +497,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                             className="font-bold"
                             style={{ 
                               fontSize: `${customization.fontSize.subheading || customization.fontSize.body + 2}px`,
-                              color: customization.theme.colors?.textPrimary || customization.theme.text
+                              color: customization.accentColor || customization.theme.primary
                             }}
                             as="h3"
                           />
@@ -501,7 +510,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                               className="inline-block"
                               style={{ 
                                 fontSize: `${customization.fontSize.body}px`,
-                                color: customization.theme.colors?.textSecondary || customization.theme.secondary
+                                color: "#6B7280"
                               }}
                               as="span"
                             />
@@ -514,7 +523,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                               className="inline-block"
                               style={{ 
                                 fontSize: `${customization.fontSize.body}px`,
-                                color: customization.theme.colors?.textSecondary || customization.theme.secondary
+                                color: "#6B7280"
                               }}
                               as="span"
                             />
@@ -529,7 +538,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                                   className="inline-block"
                                   style={{ 
                                     fontSize: `${customization.fontSize.caption || customization.fontSize.body}px`,
-                                    color: customization.theme.colors?.textMuted || customization.theme.text
+                                    color: "#D1D5DB"
                                   }}
                                   as="span"
                                 />
@@ -556,7 +565,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                             className="font-bold"
                             style={{ 
                               fontSize: `${customization.fontSize.subheading || customization.fontSize.body + 2}px`,
-                              color: customization.theme.colors?.textPrimary || customization.theme.text
+                              color: customization.accentColor || customization.theme.primary
                             }}
                           >
                             {edu.institution}
@@ -571,7 +580,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                             {edu.gpa && (
                               <span style={{ 
                                 fontSize: `${customization.fontSize.caption || customization.fontSize.body}px`,
-                                color: customization.theme.colors?.textMuted || customization.theme.text
+                                color: "#D1D5DB"
                               }}>
                                 {` | GPA: ${edu.gpa}`}
                               </span>
@@ -584,7 +593,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                       className="ml-4"
                       style={{ 
                         fontSize: `${customization.fontSize.small || customization.fontSize.body}px`,
-                        color: customization.theme.colors?.textTertiary || customization.theme.text
+                        color: "#9CA3AF"
                       }}
                     >
                       {isEditable ? (
@@ -959,8 +968,8 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
                             </a>
                           )}
                         </div>
-                        <p className="mt-1.5 leading-relaxed" style={{ lineHeight: '1.6', color: customization.theme.colors?.textSecondary || customization.theme.text }}>{project.description}</p>
-                        <div className="text-sm mt-2" style={{ color: customization.theme.colors?.textTertiary || customization.theme.text }}>
+                        <p className="mt-1.5 leading-relaxed" style={{ lineHeight: '1.6', color: "#374151" }}>{project.description}</p>
+                        <div className="text-sm mt-2" style={{ color: "#9CA3AF" }}>
                           <span className="font-semibold">Technologies: </span>
                           {project.technologies.join(", ")}
                         </div>
@@ -999,7 +1008,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
         className="max-w-[8.5in] mx-auto bg-white shadow-lg print:shadow-none print:p-0"
         style={{
           minHeight: "11in",
-          color: customization.theme.colors?.textSecondary || customization.theme.text,
+          color: "#374151", // Neutral gray for body text
           fontFamily: customization.fontFamily,
           letterSpacing: `${customization.spacing.letterSpacing}px`,
           padding: `${customization.spacing.pageMargin}px`,
@@ -1014,7 +1023,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
               className="font-bold mb-1.5"
               style={{
                 fontSize: `${customization.fontSize.name}px`,
-                color: customization.accentColor || customization.theme.colors?.textPrimary || customization.theme.primary,
+                color: getHeaderColor(),
               }}
               as="h1"
             />
@@ -1023,7 +1032,7 @@ const Resume = forwardRef<HTMLDivElement, ResumeProps>(
               className="font-bold mb-1.5"
               style={{
                 fontSize: `${customization.fontSize.name}px`,
-                color: customization.accentColor || customization.theme.colors?.textPrimary || customization.theme.primary,
+                color: getHeaderColor(),
               }}
             >
               {data.contact.fullName}

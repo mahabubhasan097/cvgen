@@ -127,24 +127,30 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                 {/* Themes */}
                 <div>
                   <h3 className="text-sm font-bold mb-3 text-gray-900">Color Theme</h3>
-                  <div className="space-y-2">
-                    {DEFAULT_THEMES.map((theme) => (
-                      <button
-                        key={theme.name}
-                        onClick={() => onUpdate({ ...settings, theme, accentColor: theme.primary })}
-                        className={`w-full p-3 rounded-lg border-2 transition-all flex items-center gap-3 ${
-                          settings.theme.name === theme.name
-                            ? "border-indigo-600 bg-indigo-50"
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                      >
-                        <div
-                          className="w-6 h-6 rounded"
-                          style={{ backgroundColor: theme.primary }}
-                        />
-                        <span className="text-sm font-medium">{theme.name}</span>
-                      </button>
-                    ))}
+                  <div className="max-h-80 overflow-y-auto pr-2">
+                    <div className="grid grid-cols-2 gap-2">
+                      {DEFAULT_THEMES.map((theme) => (
+                        <button
+                          key={theme.name}
+                          onClick={() => {
+                            // If accentColor matches current theme, clear it so new theme color applies
+                            const newAccentColor = (settings.accentColor === settings.theme.primary) ? theme.primary : settings.accentColor;
+                            onUpdate({ ...settings, theme, accentColor: newAccentColor });
+                          }}
+                          className={`p-2 rounded-lg border-2 transition-all flex flex-col items-center gap-2 hover:scale-105 ${
+                            settings.theme.name === theme.name
+                              ? "border-indigo-600 bg-indigo-50 shadow-md"
+                              : "border-gray-200 hover:border-gray-300 hover:shadow-sm"
+                          }`}
+                        >
+                          <div
+                            className="w-8 h-8 rounded-full shadow-sm"
+                            style={{ backgroundColor: theme.primary }}
+                          />
+                          <span className="text-xs font-medium text-center leading-tight">{theme.name}</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
 

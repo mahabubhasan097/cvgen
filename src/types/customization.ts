@@ -150,6 +150,111 @@ export const DEFAULT_THEMES: ColorTheme[] = [
       borderLight: "#D1D5DB",
     },
   },
+  {
+    name: "Corporate Navy",
+    primary: "#1E3A8A",
+    secondary: "#3730A3",
+    text: "#1E40AF",
+    border: "#1E3A8A",
+    colors: {
+      textPrimary: "#1E3A8A",      // Deep navy for headers
+      textSecondary: "#3730A3",    // Royal blue for companies
+      textTertiary: "#64748B",     // Slate gray for dates
+      textMuted: "#94A3B8",        // Light slate for meta
+      accentLight: "#EEF2FF",
+      borderLight: "#C7D2FE",
+    },
+  },
+  {
+    name: "Forest Green",
+    primary: "#166534",
+    secondary: "#16A34A",
+    text: "#15803D",
+    border: "#166534",
+    colors: {
+      textPrimary: "#14532D",      // Forest green for headers
+      textSecondary: "#166534",    // Emerald for companies
+      textTertiary: "#6B7280",     // Gray for dates
+      textMuted: "#9CA3AF",        // Light gray for meta
+      accentLight: "#F0FDF4",
+      borderLight: "#BBF7D0",
+    },
+  },
+  {
+    name: "Burgundy Red",
+    primary: "#991B1B",
+    secondary: "#DC2626",
+    text: "#B91C1C",
+    border: "#991B1B",
+    colors: {
+      textPrimary: "#7F1D1D",      // Dark burgundy for headers
+      textSecondary: "#991B1B",    // Crimson for companies
+      textTertiary: "#6B7280",     // Gray for dates
+      textMuted: "#9CA3AF",        // Light gray for meta
+      accentLight: "#FEF2F2",
+      borderLight: "#FECACA",
+    },
+  },
+  {
+    name: "Ocean Teal",
+    primary: "#0F766E",
+    secondary: "#14B8A6",
+    text: "#0D9488",
+    border: "#0F766E",
+    colors: {
+      textPrimary: "#134E4A",      // Dark teal for headers
+      textSecondary: "#0F766E",    // Teal for companies
+      textTertiary: "#6B7280",     // Gray for dates
+      textMuted: "#9CA3AF",        // Light gray for meta
+      accentLight: "#F0FDFA",
+      borderLight: "#CCFBF1",
+    },
+  },
+  {
+    name: "Royal Purple",
+    primary: "#6B21A8",
+    secondary: "#8B5CF6",
+    text: "#7C2D12",
+    border: "#6B21A8",
+    colors: {
+      textPrimary: "#581C87",      // Deep purple for headers
+      textSecondary: "#6B21A8",    // Royal purple for companies
+      textTertiary: "#6B7280",     // Gray for dates
+      textMuted: "#9CA3AF",        // Light gray for meta
+      accentLight: "#FAF5FF",
+      borderLight: "#E9D5FF",
+    },
+  },
+  {
+    name: "Steel Blue",
+    primary: "#1E40AF",
+    secondary: "#3B82F6",
+    text: "#1E3A8A",
+    border: "#1E40AF",
+    colors: {
+      textPrimary: "#1E3A8A",      // Steel blue for headers
+      textSecondary: "#1E40AF",    // Blue for companies
+      textTertiary: "#64748B",     // Slate for dates
+      textMuted: "#94A3B8",        // Light slate for meta
+      accentLight: "#EFF6FF",
+      borderLight: "#DBEAFE",
+    },
+  },
+  {
+    name: "Charcoal Gray",
+    primary: "#374151",
+    secondary: "#6B7280",
+    text: "#1F2937",
+    border: "#4B5563",
+    colors: {
+      textPrimary: "#111827",      // Almost black for headers
+      textSecondary: "#374151",    // Charcoal for companies
+      textTertiary: "#6B7280",     // Medium gray for dates
+      textMuted: "#9CA3AF",        // Light gray for meta
+      accentLight: "#F9FAFB",
+      borderLight: "#E5E7EB",
+    },
+  },
 ];
 
 export const DEFAULT_CUSTOMIZATION: CustomizationSettings = {

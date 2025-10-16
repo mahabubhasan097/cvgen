@@ -20,10 +20,19 @@ const ResumeSection: React.FC<ResumeSectionProps> = ({
   customization,
   style,
 }) => {
+  // Helper function to get effective header color
+  const getHeaderColor = () => {
+    // If accentColor is set to a custom value (not the theme's primary), use it
+    if (customization.accentColor && customization.accentColor !== customization.theme.primary) {
+      return customization.accentColor;
+    }
+    // Otherwise, use theme's primary color
+    return customization.theme.primary;
+  };
   const getHeaderStyle = (): React.CSSProperties => {
     const baseStyle: React.CSSProperties = {
       fontSize: `${customization.fontSize.heading}px`,
-      color: customization.accentColor || customization.theme.colors?.textPrimary || customization.theme.primary,
+      color: getHeaderColor(),
       paddingBottom: "4px",
       marginBottom: `${customization.spacing.line}px`,
     };
@@ -32,12 +41,12 @@ const ResumeSection: React.FC<ResumeSectionProps> = ({
       case "underline":
         return {
           ...baseStyle,
-          borderBottom: `${customization.borderWidth}px solid ${customization.accentColor || customization.theme.border}`,
+          borderBottom: `${customization.borderWidth}px solid ${getHeaderColor()}`,
         };
       case "background":
         return {
           ...baseStyle,
-          backgroundColor: customization.accentColor || customization.theme.primary,
+          backgroundColor: getHeaderColor(),
           color: "white",
           padding: "8px 12px",
           marginBottom: `${customization.spacing.line * 2}px`,
@@ -45,7 +54,7 @@ const ResumeSection: React.FC<ResumeSectionProps> = ({
       case "border":
         return {
           ...baseStyle,
-          border: `${customization.borderWidth}px solid ${customization.accentColor || customization.theme.border}`,
+          border: `${customization.borderWidth}px solid ${getHeaderColor()}`,
           padding: "6px 12px",
           marginBottom: `${customization.spacing.line * 2}px`,
         };

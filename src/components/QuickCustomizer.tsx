@@ -72,12 +72,17 @@ const QuickCustomizer: React.FC<QuickCustomizerProps> = ({
           {/* Quick Color Themes */}
           <div className="flex flex-col gap-1">
             <label className="text-xs font-bold text-gray-700">Theme</label>
-            <div className="flex gap-1">
-              {DEFAULT_THEMES.slice(0, 5).map((theme) => (
+            <div className="flex gap-1 items-center">
+              {/* Show 4 most popular themes */}
+              {DEFAULT_THEMES.slice(0, 4).map((theme) => (
                 <button
                   key={theme.name}
-                  onClick={() => onUpdate({ ...settings, theme, accentColor: theme.primary })}
-                  className={`w-8 h-8 rounded-lg border-2 transition-all hover:scale-110 ${
+                  onClick={() => {
+                    // If accentColor matches current theme, clear it so new theme color applies
+                    const newAccentColor = (settings.accentColor === settings.theme.primary) ? theme.primary : settings.accentColor;
+                    onUpdate({ ...settings, theme, accentColor: newAccentColor });
+                  }}
+                  className={`w-7 h-7 rounded-lg border-2 transition-all hover:scale-110 ${
                     settings.theme.name === theme.name
                       ? "border-indigo-600 shadow-md scale-105"
                       : "border-gray-300"
@@ -86,6 +91,14 @@ const QuickCustomizer: React.FC<QuickCustomizerProps> = ({
                   title={theme.name}
                 />
               ))}
+              {/* More themes indicator */}
+              <button
+                onClick={onOpenFullPanel}
+                className="w-7 h-7 rounded-lg border-2 border-dashed border-gray-300 hover:border-indigo-400 hover:bg-indigo-50 flex items-center justify-center transition-all hover:scale-110"
+                title="More themes"
+              >
+                <span className="text-xs text-gray-500 font-bold hover:text-indigo-600">+</span>
+              </button>
             </div>
           </div>
 
