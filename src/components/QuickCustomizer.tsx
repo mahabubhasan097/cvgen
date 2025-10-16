@@ -120,7 +120,10 @@ const QuickCustomizer: React.FC<QuickCustomizerProps> = ({
                     fontSize: {
                       name: Math.max(24, settings.fontSize.name - 2),
                       heading: Math.max(14, settings.fontSize.heading - 1),
+                      subheading: Math.max(13, (settings.fontSize.subheading || 15) - 1),
                       body: Math.max(10, settings.fontSize.body - 1),
+                      small: Math.max(9, (settings.fontSize.small || 12) - 1),
+                      caption: Math.max(9, (settings.fontSize.caption || 11) - 1),
                     },
                   })
                 }
@@ -136,7 +139,10 @@ const QuickCustomizer: React.FC<QuickCustomizerProps> = ({
                     fontSize: {
                       name: Math.min(40, settings.fontSize.name + 2),
                       heading: Math.min(24, settings.fontSize.heading + 1),
+                      subheading: Math.min(18, (settings.fontSize.subheading || 15) + 1),
                       body: Math.min(16, settings.fontSize.body + 1),
+                      small: Math.min(14, (settings.fontSize.small || 12) + 1),
+                      caption: Math.min(13, (settings.fontSize.caption || 11) + 1),
                     },
                   })
                 }

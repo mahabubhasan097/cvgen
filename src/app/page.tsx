@@ -146,10 +146,32 @@ export default function Home() {
     setShowPDFInstructions(true);
   };
 
-  const handleReset = () => {
+  const handleThemeReset = () => {
     if (
       window.confirm(
-        "Are you sure you want to reset to default template? This will clear all your current data."
+        "Are you sure you want to reset all styling and customization settings to defaults? Your resume content will remain unchanged."
+      )
+    ) {
+      setCustomization(DEFAULT_CUSTOMIZATION);
+      // Keep resume data unchanged
+    }
+  };
+
+  const handleContentReset = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to reset all resume content to default template? Your styling settings will remain unchanged."
+      )
+    ) {
+      setResumeData(DEFAULT_RESUME);
+      // Keep customization unchanged
+    }
+  };
+
+  const handleFullReset = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to reset EVERYTHING to default? This will clear all your content AND styling settings."
       )
     ) {
       setResumeData(DEFAULT_RESUME);
@@ -290,15 +312,46 @@ export default function Home() {
                   </label>
                 </div>
 
-                <button
-                  onClick={handleReset}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                  <span>Reset</span>
-                </button>
+                {/* Reset Options */}
+                <div className="space-y-3">
+                  <h4 className="text-sm font-bold text-gray-700 text-center">Reset Options</h4>
+                  
+                  {/* Theme Reset */}
+                  <button
+                    onClick={handleThemeReset}
+                    title="Reset all styling, themes, fonts, and customization settings to defaults. Keeps your content unchanged."
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
+                    </svg>
+                    <span>Theme Reset</span>
+                  </button>
+
+                  {/* Content Reset */}
+                  <button
+                    onClick={handleContentReset}
+                    title="Reset all resume content (personal info, experience, education, skills) to default template. Keeps your styling unchanged."
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span>Content Reset</span>
+                  </button>
+
+                  {/* Full Reset */}
+                  <button
+                    onClick={handleFullReset}
+                    title="Reset EVERYTHING to default - both content and styling. This will clear all your work and start fresh."
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    <span>Full Reset</span>
+                  </button>
+                </div>
               </div>
             </div>
 

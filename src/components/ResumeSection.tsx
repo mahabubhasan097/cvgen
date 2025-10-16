@@ -23,7 +23,7 @@ const ResumeSection: React.FC<ResumeSectionProps> = ({
   const getHeaderStyle = (): React.CSSProperties => {
     const baseStyle: React.CSSProperties = {
       fontSize: `${customization.fontSize.heading}px`,
-      color: customization.accentColor || customization.theme.primary,
+      color: customization.accentColor || customization.theme.colors?.textPrimary || customization.theme.primary,
       paddingBottom: "4px",
       marginBottom: `${customization.spacing.line}px`,
     };

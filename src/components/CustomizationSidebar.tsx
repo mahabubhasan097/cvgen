@@ -131,7 +131,7 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                     {DEFAULT_THEMES.map((theme) => (
                       <button
                         key={theme.name}
-                        onClick={() => onUpdate({ ...settings, theme })}
+                        onClick={() => onUpdate({ ...settings, theme, accentColor: theme.primary })}
                         className={`w-full p-3 rounded-lg border-2 transition-all flex items-center gap-3 ${
                           settings.theme.name === theme.name
                             ? "border-indigo-600 bg-indigo-50"
@@ -292,9 +292,17 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                   </div>
                   <button
                     onClick={() => onUpdate({ ...settings, accentColor: settings.theme.primary })}
-                    className="mt-2 w-full text-xs text-blue-600 hover:text-blue-700 font-medium"
+                    className={`mt-2 w-full text-xs font-medium transition-colors ${
+                      settings.accentColor === settings.theme.primary
+                        ? "text-gray-400 cursor-not-allowed"
+                        : "text-blue-600 hover:text-blue-700"
+                    }`}
+                    disabled={settings.accentColor === settings.theme.primary}
                   >
-                    Reset to theme color
+                    {settings.accentColor === settings.theme.primary 
+                      ? "Using theme color" 
+                      : "Reset to theme color"
+                    }
                   </button>
                 </div>
               </>
@@ -347,6 +355,25 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                     </div>
                     <div>
                       <label className="text-xs font-medium text-gray-700 flex justify-between mb-1">
+                        <span>Subheading (Job Titles)</span>
+                        <span className="text-indigo-600">{settings.fontSize.subheading || 15}px</span>
+                      </label>
+                      <input
+                        type="range"
+                        min="13"
+                        max="18"
+                        value={settings.fontSize.subheading || 15}
+                        onChange={(e) =>
+                          onUpdate({
+                            ...settings,
+                            fontSize: { ...settings.fontSize, subheading: parseInt(e.target.value) },
+                          })
+                        }
+                        className="w-full"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-gray-700 flex justify-between mb-1">
                         <span>Body</span>
                         <span className="text-indigo-600">{settings.fontSize.body}px</span>
                       </label>
@@ -359,6 +386,44 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                           onUpdate({
                             ...settings,
                             fontSize: { ...settings.fontSize, body: parseInt(e.target.value) },
+                          })
+                        }
+                        className="w-full"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-gray-700 flex justify-between mb-1">
+                        <span>Small (Dates, Locations)</span>
+                        <span className="text-indigo-600">{settings.fontSize.small || 12}px</span>
+                      </label>
+                      <input
+                        type="range"
+                        min="10"
+                        max="14"
+                        value={settings.fontSize.small || 12}
+                        onChange={(e) =>
+                          onUpdate({
+                            ...settings,
+                            fontSize: { ...settings.fontSize, small: parseInt(e.target.value) },
+                          })
+                        }
+                        className="w-full"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-gray-700 flex justify-between mb-1">
+                        <span>Caption (Contact Info)</span>
+                        <span className="text-indigo-600">{settings.fontSize.caption || 11}px</span>
+                      </label>
+                      <input
+                        type="range"
+                        min="9"
+                        max="13"
+                        value={settings.fontSize.caption || 11}
+                        onChange={(e) =>
+                          onUpdate({
+                            ...settings,
+                            fontSize: { ...settings.fontSize, caption: parseInt(e.target.value) },
                           })
                         }
                         className="w-full"

@@ -25,7 +25,7 @@ const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
   const updateTheme = (themeName: string) => {
     const theme = DEFAULT_THEMES.find((t) => t.name === themeName);
     if (theme) {
-      onUpdate({ ...settings, theme });
+      onUpdate({ ...settings, theme, accentColor: theme.primary });
     }
   };
 

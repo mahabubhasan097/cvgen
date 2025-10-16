@@ -87,15 +87,25 @@ export const loadCustomizationFromStorage = (): CustomizationSettings | null => 
     const savedSettings = JSON.parse(data);
     
     // Merge with defaults to ensure all new properties exist (backward compatibility)
-    return {
+    const merged = {
       ...DEFAULT_CUSTOMIZATION,
       ...savedSettings,
       fontSize: { ...DEFAULT_CUSTOMIZATION.fontSize, ...savedSettings.fontSize },
       spacing: { ...DEFAULT_CUSTOMIZATION.spacing, ...savedSettings.spacing },
       lineHeight: { ...DEFAULT_CUSTOMIZATION.lineHeight, ...savedSettings.lineHeight },
-      theme: { ...DEFAULT_CUSTOMIZATION.theme, ...savedSettings.theme },
+      theme: {
+        ...DEFAULT_CUSTOMIZATION.theme,
+        ...savedSettings.theme,
+        // Ensure extended colors exist (new in v1.0.0+)
+        colors: {
+          ...DEFAULT_CUSTOMIZATION.theme.colors,
+          ...savedSettings.theme?.colors,
+        },
+      },
       sections: savedSettings.sections || DEFAULT_CUSTOMIZATION.sections,
     };
+    
+    return merged;
   } catch (error) {
     console.error("Failed to load customization from storage:", error);
     return null;
