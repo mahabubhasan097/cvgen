@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CustomizationSettings, DEFAULT_THEMES, ATS_SAFE_FONTS } from "@/types/customization";
+import { CustomizationSettings, DEFAULT_THEMES, ATS_SAFE_FONTS, PRESET_CONFIGS } from "@/types/customization";
 import { APP_VERSION } from "@/constants/version";
 
 interface QuickCustomizerProps {
@@ -27,23 +27,7 @@ const QuickCustomizer: React.FC<QuickCustomizerProps> = ({
                 <button
                   key={preset}
                   onClick={() => {
-                    const config = {
-                      compact: {
-                        fontSize: { name: 28, heading: 16, body: 12 },
-                        spacing: { section: 12, line: 4, letterSpacing: 0, pageMargin: 36, sectionPadding: 0 },
-                        lineHeight: { heading: 1.1, body: 1.4, list: 1.5 },
-                      },
-                      normal: {
-                        fontSize: { name: 30, heading: 18, body: 14 },
-                        spacing: { section: 16, line: 6, letterSpacing: 0, pageMargin: 48, sectionPadding: 0 },
-                        lineHeight: { heading: 1.2, body: 1.5, list: 1.6 },
-                      },
-                      spacious: {
-                        fontSize: { name: 34, heading: 20, body: 15 },
-                        spacing: { section: 24, line: 8, letterSpacing: 0.5, pageMargin: 60, sectionPadding: 8 },
-                        lineHeight: { heading: 1.3, body: 1.6, list: 1.7 },
-                      },
-                    }[preset];
+                    const config = PRESET_CONFIGS[preset];
                     onUpdate({
                       ...settings,
                       preset,

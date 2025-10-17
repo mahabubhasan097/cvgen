@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import {
   CustomizationSettings,
   DEFAULT_THEMES,
-  SectionConfig,
 } from "@/types/customization";
 
 interface CustomizationPanelProps {

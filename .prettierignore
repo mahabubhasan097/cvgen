@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Production builds
+.next/
+out/
+build/
+dist/
+
+# Environment files
+.env*
+
+# Logs
+*.log
+
+# Package files
+package-lock.json
+yarn.lock
+
+# Generated files
+*.generated.*
+*.d.ts
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+
+# Config files that should maintain their formatting
+*.config.js
+*.config.ts
+vercel.json

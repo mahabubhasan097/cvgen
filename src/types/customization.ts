@@ -72,6 +72,7 @@ export interface CustomizationSettings {
   accentColor: string;
   headingCase: "normal" | "uppercase" | "capitalize";
   showDividers: boolean;
+  template: string; // Template ID
 }
 
 export const DEFAULT_THEMES: ColorTheme[] = [
@@ -297,6 +298,7 @@ export const DEFAULT_CUSTOMIZATION: CustomizationSettings = {
   accentColor: DEFAULT_THEMES[0].primary,
   headingCase: "normal",
   showDividers: false,
+  template: "professional-standard", // Default template
 };
 
 // Preset configurations with complete typography scale
