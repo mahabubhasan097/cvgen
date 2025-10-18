@@ -207,10 +207,20 @@ export default function Home() {
 
   if (!isMounted) {
     return (
-      <div className='min-h-screen flex items-center justify-center bg-gray-50'>
+      <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100'>
         <div className='text-center'>
-          <div className='inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600'></div>
-          <p className='mt-4 text-gray-600'>Loading...</p>
+          <div className='relative'>
+            <div className='inline-block animate-spin rounded-full h-16 w-16 border-4 border-blue-200'></div>
+            <div className='inline-block animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent absolute top-0 left-0'></div>
+          </div>
+          <div className='mt-6'>
+            <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+              Loading CVGen
+            </h3>
+            <p className='text-sm text-gray-600 animate-pulse'>
+              Preparing your professional resume builder...
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -227,7 +237,7 @@ export default function Home() {
               {/* Modern Hero Section */}
               <div className='text-center mb-8'>
                 <div className='flex items-center justify-center mb-4'>
-                  <div className='w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg'>
+                  <div className='w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg animate-float hover-scale'>
                     <svg
                       className='w-7 h-7 text-white'
                       fill='none'
@@ -247,9 +257,9 @@ export default function Home() {
                   CVGen
                 </h1>
                 <p className='text-sm text-gray-600 font-medium flex items-center justify-center gap-2'>
-                  <span className='w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse'></span>
+                  <span className='w-1.5 h-1.5 bg-blue-500 rounded-full animate-heartbeat'></span>
                   Professional Resume Builder
-                  <span className='w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse'></span>
+                  <span className='w-1.5 h-1.5 bg-purple-500 rounded-full animate-heartbeat animation-delay-2000'></span>
                 </p>
               </div>
 
@@ -348,7 +358,7 @@ export default function Home() {
                       {isCustomizationOpen ? 'Close' : 'Customize'}
                     </span>
                   </div>
-                  <div className='absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg animate-pulse'>
+                  <div className='absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg animate-wiggle'>
                     NEW
                   </div>
                 </button>

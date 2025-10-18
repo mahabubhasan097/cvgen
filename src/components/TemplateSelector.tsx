@@ -40,7 +40,7 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
       {/* Modern Header */}
       <div className='text-center'>
         <div className='flex items-center justify-center mb-3'>
-          <div className='w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center'>
+          <div className='w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center animate-float hover-scale'>
             <svg
               className='w-4 h-4 text-white'
               fill='none'
@@ -105,9 +105,9 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
             <button
               key={template.id}
               onClick={() => onTemplateChange(template.id)}
-              className={`group p-4 rounded-2xl border-2 transition-all duration-300 text-left hover:scale-[1.02] relative overflow-hidden ${
+              className={`group p-4 rounded-2xl border-2 transition-all duration-300 text-left hover:scale-[1.02] relative overflow-hidden card-interactive ${
                 currentTemplate === template.id
-                  ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-purple-50 shadow-xl'
+                  ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-purple-50 shadow-xl animate-glow'
                   : 'border-gray-200 hover:border-blue-300 hover:shadow-lg bg-white'
               }`}
             >

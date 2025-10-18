@@ -83,7 +83,7 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
             <div className='absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12'></div>
             <div className='relative z-10'>
               <div className='flex items-center gap-3 mb-3'>
-                <div className='w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center'>
+                <div className='w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center animate-float'>
                   <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                     <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z' />
                   </svg>
@@ -189,9 +189,9 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                         <button
                           key={preset}
                           onClick={() => applyPreset(preset)}
-                          className={`p-4 rounded-xl border-2 capitalize text-sm font-semibold transition-all duration-200 ${
+                          className={`p-4 rounded-xl border-2 capitalize text-sm font-semibold transition-all duration-200 hover-scale ${
                             settings.preset === preset
-                              ? 'border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 shadow-md transform scale-105'
+                              ? 'border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 shadow-md transform scale-105 animate-glow'
                               : 'border-gray-200 hover:border-blue-300 hover:shadow-sm text-gray-700 bg-white'
                           }`}
                         >
