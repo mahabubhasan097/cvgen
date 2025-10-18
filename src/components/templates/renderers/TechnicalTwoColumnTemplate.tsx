@@ -21,53 +21,7 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
     );
   };
 
-  // Add/Remove functions for Technical template
-  const addExperience = () => {
-    const newExp = {
-      id: `exp${Date.now()}`,
-      company: 'Company Name',
-      position: 'Job Title',
-      location: 'City, State',
-      startDate: 'Month Year',
-      endDate: 'Month Year',
-      isCurrently: false,
-      achievements: ['Achievement 1', 'Achievement 2', 'Achievement 3'],
-    };
-    onUpdate && onUpdate({ ...data, experience: [...data.experience, newExp] });
-  };
-
-  const removeExperience = (index: number) => {
-    if (data.experience.length <= 1) {
-      alert('You must have at least one experience entry!');
-      return;
-    }
-    const newExp = data.experience.filter((_, i) => i !== index);
-    onUpdate && onUpdate({ ...data, experience: newExp });
-  };
-
-  const addAchievement = (expIndex: number) => {
-    const newExp = [...data.experience];
-    const currentAchievements = newExp[expIndex].achievements || [];
-    newExp[expIndex] = {
-      ...newExp[expIndex],
-      achievements: [...currentAchievements, 'New achievement'],
-    };
-    onUpdate && onUpdate({ ...data, experience: newExp });
-  };
-
-  const removeAchievement = (expIndex: number, achIndex: number) => {
-    const newExp = [...data.experience];
-    const currentAchievements = newExp[expIndex].achievements || [];
-    if (currentAchievements.length <= 1) {
-      alert('You must have at least one achievement per experience!');
-      return;
-    }
-    newExp[expIndex] = {
-      ...newExp[expIndex],
-      achievements: currentAchievements.filter((_, i) => i !== achIndex),
-    };
-    onUpdate && onUpdate({ ...data, experience: newExp });
-  };
+  // Add/Remove functions for Technical template sidebar sections
 
   const addSkill = () => {
     const newSkill = {
@@ -99,43 +53,11 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
   };
 
   const removeCertification = (index: number) => {
+    if (!data.certifications) return;
     const newCerts = data.certifications.filter((_, i) => i !== index);
     onUpdate && onUpdate({ ...data, certifications: newCerts });
   };
 
-  const addProject = () => {
-    const newProject = {
-      id: `proj${Date.now()}`,
-      name: 'Project Name',
-      description: 'Project description...',
-      technologies: ['Tech 1', 'Tech 2'],
-    };
-    onUpdate && onUpdate({ ...data, projects: [...data.projects, newProject] });
-  };
-
-  const removeProject = (index: number) => {
-    const newProjects = data.projects.filter((_, i) => i !== index);
-    onUpdate && onUpdate({ ...data, projects: newProjects });
-  };
-
-  const addEducation = () => {
-    const newEdu = {
-      id: `edu${Date.now()}`,
-      institution: 'Institution Name',
-      degree: 'Degree',
-      graduationDate: 'Graduation Date',
-    };
-    onUpdate && onUpdate({ ...data, education: [...data.education, newEdu] });
-  };
-
-  const removeEducation = (index: number) => {
-    if (data.education.length <= 1) {
-      alert('You must have at least one education entry!');
-      return;
-    }
-    const newEdu = data.education.filter((_, i) => i !== index);
-    onUpdate && onUpdate({ ...data, education: newEdu });
-  };
 
   return (
     <div
@@ -345,7 +267,7 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
           {/* Certifications - Sidebar */}
           {customization.sections.find(s => s.id === 'certifications')
             ?.visible &&
-            data.certifications.length > 0 && (
+            data.certifications && data.certifications.length > 0 && (
               <div>
                 <h2
                   className='font-bold uppercase tracking-wider border-b-2 mb-4'
@@ -359,7 +281,7 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
                   CERTIFICATIONS
                 </h2>
                 <div className='space-y-3'>
-                  {data.certifications.map((cert, index) => (
+                  {data.certifications?.map((cert, index) => (
                     <div key={index}>
                       <div className='flex justify-between items-start'>
                         <div className='flex-1'>

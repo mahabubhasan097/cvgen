@@ -122,10 +122,11 @@ export const renderSections = ({
       date: 'Month Year',
     };
     onUpdate &&
-      onUpdate({ ...data, certifications: [...data.certifications, newCert] });
+      onUpdate({ ...data, certifications: [...(data.certifications || []), newCert] });
   };
 
   const removeCertification = (index: number) => {
+    if (!data.certifications) return;
     const newCertifications = data.certifications.filter((_, i) => i !== index);
     onUpdate && onUpdate({ ...data, certifications: newCertifications });
   };
@@ -137,15 +138,17 @@ export const renderSections = ({
       description: 'Project description...',
       technologies: ['Technology 1', 'Technology 2'],
     };
-    onUpdate && onUpdate({ ...data, projects: [...data.projects, newProject] });
+    onUpdate && onUpdate({ ...data, projects: [...(data.projects || []), newProject] });
   };
 
   const removeProject = (index: number) => {
+    if (!data.projects) return;
     const newProjects = data.projects.filter((_, i) => i !== index);
     onUpdate && onUpdate({ ...data, projects: newProjects });
   };
 
   const updateProjectTechnologies = (index: number, value: string) => {
+    if (!data.projects) return;
     const newProjects = [...data.projects];
     newProjects[index] = {
       ...newProjects[index],
@@ -157,7 +160,7 @@ export const renderSections = ({
     onUpdate && onUpdate({ ...data, projects: newProjects });
   };
 
-  const renderSectionHeader = (title: string, id: string) => (
+  const renderSectionHeader = (title: string) => (
     <h2
       className='font-bold uppercase tracking-wider border-b-2'
       style={{
@@ -177,7 +180,7 @@ export const renderSections = ({
 
     return (
       <div style={{ marginBottom: `${customization.spacing.section}px` }}>
-        {renderSectionHeader('PROFESSIONAL SUMMARY', 'summary')}
+        {renderSectionHeader('PROFESSIONAL SUMMARY')}
         <div
           style={{
             fontSize: `${customization.fontSize.body}px`,
@@ -200,7 +203,7 @@ export const renderSections = ({
   const renderExperienceSection = () => {
     return (
       <div style={{ marginBottom: `${customization.spacing.section}px` }}>
-        {renderSectionHeader('PROFESSIONAL EXPERIENCE', 'experience')}
+        {renderSectionHeader('PROFESSIONAL EXPERIENCE')}
         {data.experience.length === 0 ? (
           isEditable && (
             <p
@@ -457,7 +460,7 @@ export const renderSections = ({
   const renderEducationSection = () => {
     return (
       <div style={{ marginBottom: `${customization.spacing.section}px` }}>
-        {renderSectionHeader('EDUCATION', 'education')}
+        {renderSectionHeader('EDUCATION')}
         {data.education.length === 0 ? (
           isEditable && (
             <p
@@ -627,7 +630,7 @@ export const renderSections = ({
   const renderSkillsSection = () => {
     return (
       <div style={{ marginBottom: `${customization.spacing.section}px` }}>
-        {renderSectionHeader('SKILLS', 'skills')}
+        {renderSectionHeader('SKILLS')}
         {data.skills.length === 0 ? (
           isEditable && (
             <p
@@ -736,8 +739,8 @@ export const renderSections = ({
   const renderCertificationsSection = () => {
     return (
       <div style={{ marginBottom: `${customization.spacing.section}px` }}>
-        {renderSectionHeader('CERTIFICATIONS', 'certifications')}
-        {data.certifications.length === 0 ? (
+        {renderSectionHeader('CERTIFICATIONS')}
+        {(!data.certifications || data.certifications.length === 0) ? (
           isEditable && (
             <p
               className='text-gray-500 italic'
@@ -751,7 +754,7 @@ export const renderSections = ({
           )
         ) : (
           <div className='space-y-3'>
-            {data.certifications.map((cert, index) => (
+            {data.certifications?.map((cert, index) => (
               <div
                 key={index}
                 className='flex justify-between items-start'
@@ -771,6 +774,7 @@ export const renderSections = ({
                     <EditableField
                       value={cert.name}
                       onChange={value => {
+                        if (!data.certifications) return;
                         const newCerts = [...data.certifications];
                         newCerts[index] = { ...newCerts[index], name: value };
                         onUpdate &&
@@ -790,6 +794,7 @@ export const renderSections = ({
                     <EditableField
                       value={cert.issuer}
                       onChange={value => {
+                        if (!data.certifications) return;
                         const newCerts = [...data.certifications];
                         newCerts[index] = { ...newCerts[index], issuer: value };
                         onUpdate &&
@@ -810,6 +815,7 @@ export const renderSections = ({
                     <EditableField
                       value={cert.date}
                       onChange={value => {
+                        if (!data.certifications) return;
                         const newCerts = [...data.certifications];
                         newCerts[index] = { ...newCerts[index], date: value };
                         onUpdate &&
@@ -858,8 +864,8 @@ export const renderSections = ({
   const renderProjectsSection = () => {
     return (
       <div style={{ marginBottom: `${customization.spacing.section}px` }}>
-        {renderSectionHeader('PROJECTS', 'projects')}
-        {data.projects.length === 0 ? (
+        {renderSectionHeader('PROJECTS')}
+        {(!data.projects || data.projects.length === 0) ? (
           isEditable && (
             <p
               className='text-gray-500 italic'
@@ -873,7 +879,7 @@ export const renderSections = ({
           )
         ) : (
           <div className='space-y-4'>
-            {data.projects.map((project, index) => (
+            {data.projects?.map((project, index) => (
               <div
                 key={index}
                 style={{
@@ -893,6 +899,7 @@ export const renderSections = ({
                       <EditableField
                         value={project.name}
                         onChange={value => {
+                          if (!data.projects) return;
                           const newProjects = [...data.projects];
                           newProjects[index] = {
                             ...newProjects[index],
@@ -914,6 +921,7 @@ export const renderSections = ({
                       <EditableField
                         value={project.description}
                         onChange={value => {
+                          if (!data.projects) return;
                           const newProjects = [...data.projects];
                           newProjects[index] = {
                             ...newProjects[index],

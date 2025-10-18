@@ -1,7 +1,6 @@
 import { ResumeData } from '@/types/resume';
 import {
   CustomizationSettings,
-  DEFAULT_CUSTOMIZATION,
   getCustomizationForTemplate,
 } from '@/types/customization';
 import { logger } from './logger';
