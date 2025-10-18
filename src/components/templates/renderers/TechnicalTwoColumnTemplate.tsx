@@ -181,24 +181,21 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
           <EditableField
             value={data.contact.email}
             onChange={value =>
-              onUpdate &&
-              onUpdate({ ...data, contact: { ...data.contact, email: value } })
+              onUpdate?.({ ...data, contact: { ...data.contact, email: value } })
             }
             placeholder='Email'
           />
           <EditableField
             value={data.contact.phone}
             onChange={value =>
-              onUpdate &&
-              onUpdate({ ...data, contact: { ...data.contact, phone: value } })
+              onUpdate?.({ ...data, contact: { ...data.contact, phone: value } })
             }
             placeholder='Phone'
           />
           <EditableField
             value={data.contact.location}
             onChange={value =>
-              onUpdate &&
-              onUpdate({
+              onUpdate?.({
                 ...data,
                 contact: { ...data.contact, location: value },
               })
@@ -209,8 +206,7 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
             <EditableField
               value={data.contact.linkedin}
               onChange={value =>
-                onUpdate &&
-                onUpdate({
+                onUpdate?.({
                   ...data,
                   contact: { ...data.contact, linkedin: value },
                 })
@@ -222,8 +218,7 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
             <EditableField
               value={data.contact.github}
               onChange={value =>
-                onUpdate &&
-                onUpdate({
+                onUpdate?.({
                   ...data,
                   contact: { ...data.contact, github: value },
                 })
@@ -235,8 +230,7 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
             <EditableField
               value={data.contact.portfolio}
               onChange={value =>
-                onUpdate &&
-                onUpdate({
+                onUpdate?.({
                   ...data,
                   contact: { ...data.contact, portfolio: value },
                 })

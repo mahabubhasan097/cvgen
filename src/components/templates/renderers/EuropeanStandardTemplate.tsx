@@ -68,8 +68,7 @@ const EuropeanStandardTemplate: React.FC<TemplateRendererProps> = props => {
               <EditableField
                 value={data.contact.email}
                 onChange={value =>
-                  onUpdate &&
-                  onUpdate({
+                  onUpdate?.({
                     ...data,
                     contact: { ...data.contact, email: value },
                   })
@@ -88,8 +87,7 @@ const EuropeanStandardTemplate: React.FC<TemplateRendererProps> = props => {
               <EditableField
                 value={data.contact.phone}
                 onChange={value =>
-                  onUpdate &&
-                  onUpdate({
+                  onUpdate?.({
                     ...data,
                     contact: { ...data.contact, phone: value },
                   })
@@ -111,8 +109,7 @@ const EuropeanStandardTemplate: React.FC<TemplateRendererProps> = props => {
               <EditableField
                 value={data.contact.location}
                 onChange={value =>
-                  onUpdate &&
-                  onUpdate({
+                  onUpdate?.({
                     ...data,
                     contact: { ...data.contact, location: value },
                   })
@@ -132,8 +129,7 @@ const EuropeanStandardTemplate: React.FC<TemplateRendererProps> = props => {
                 <EditableField
                   value={data.contact.linkedin}
                   onChange={value =>
-                    onUpdate &&
-                    onUpdate({
+                    onUpdate?.({
                       ...data,
                       contact: { ...data.contact, linkedin: value },
                     })
