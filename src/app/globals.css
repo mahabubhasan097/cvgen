@@ -238,36 +238,76 @@ ul li {
 
   /* Technical Two-Column Template Print Styles */
   /* Force two-column layout for Technical template in print */
+
+  /* ONLY target Technical Two-Column template for print */
+  /* Force Technical Two-Column template to display as grid in print */
   .technical-template-print {
     display: grid !important;
     grid-template-columns: 1fr 2fr !important;
     gap: 1rem !important;
     max-width: 100% !important;
+    width: 100% !important;
   }
 
-  .technical-template-print .technical-sidebar {
+  /* Force Technical Two-Column template sidebar to first column */
+  .technical-template-print .lg\\:col-span-1 {
+    grid-column: 1 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  /* Force Technical Two-Column template main content to second column */
+  .technical-template-print .lg\\:col-span-2 {
+    grid-column: 2 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  /* Alternative selector approach for Technical template only */
+  .technical-template-print [class*='lg:col-span-1'] {
     grid-column: 1 !important;
     width: 100% !important;
   }
 
-  .technical-template-print .technical-main {
+  .technical-template-print [class*='lg:col-span-2'] {
     grid-column: 2 !important;
     width: 100% !important;
   }
 
-  /* Override responsive grid for print */
-  .technical-template-print .grid {
+  /* Additional fallback selectors */
+  .technical-sidebar {
+    grid-column: 1 !important;
+    width: 100% !important;
+  }
+
+  .technical-main {
+    grid-column: 2 !important;
+    width: 100% !important;
+  }
+
+  /* Force Technical Two-Column template layout with very specific selectors */
+  div.technical-template-print {
     display: grid !important;
     grid-template-columns: 1fr 2fr !important;
     gap: 1rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
   }
 
-  .technical-template-print .lg\\:col-span-1 {
+  /* Override Tailwind's grid-cols-1 for Technical template */
+  div.technical-template-print.grid-cols-1 {
+    grid-template-columns: 1fr 2fr !important;
+  }
+
+  /* Force column spans for Technical template */
+  div.technical-template-print > div.lg\\:col-span-1 {
     grid-column: 1 !important;
+    width: 100% !important;
   }
 
-  .technical-template-print .lg\\:col-span-2 {
+  div.technical-template-print > div.lg\\:col-span-2 {
     grid-column: 2 !important;
+    width: 100% !important;
   }
 
   /* Make links clickable but styled like regular text in print */
