@@ -209,10 +209,7 @@ export default function Home() {
     return (
       <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100'>
         <div className='text-center'>
-          <div className='relative'>
-            <div className='inline-block animate-spin rounded-full h-16 w-16 border-4 border-blue-200'></div>
-            <div className='inline-block animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent absolute top-0 left-0'></div>
-          </div>
+          <div className='inline-block animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent'></div>
           <div className='mt-6'>
             <h3 className='text-heading-lg text-gray-800 mb-2'>
               Loading CVGen

@@ -482,24 +482,180 @@ const ReleaseNotesModal: React.FC<ReleaseNotesModalProps> = ({
             </div>
           )}
 
-          {/* Fallback for other versions */}
-          {version !== '1.0.0' && (
-            <div className='text-center py-8'>
-              <p className='text-gray-600'>
-                Release notes for version {version}
-              </p>
-              <p className='text-sm text-gray-500 mt-2'>
-                Check CHANGELOG.md for details
-              </p>
+          {/* Version 2.0.1 Content */}
+          {version === '2.0.1' && (
+            <div className='space-y-6'>
+              {/* Highlights */}
+              <div>
+                <h3 className='text-xl font-bold text-gray-900 mb-3 flex items-center gap-2'>
+                  <span className='text-2xl'>🐛</span>
+                  Quick Fixes - Version 2.0.1
+                </h3>
+                <p className='text-gray-700 leading-relaxed'>
+                  This patch release fixes version display issues and improves
+                  the loading experience. All the powerful features from Version
+                  2.0.0 remain intact with these important fixes.
+                </p>
+              </div>
+
+              {/* What's Fixed */}
+              <div>
+                <h3 className='text-lg font-bold text-gray-900 mb-3'>
+                  🔧 What's Fixed
+                </h3>
+                <div className='space-y-3'>
+                  <div className='flex items-start gap-3 p-3 bg-green-50 rounded-lg'>
+                    <div className='flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-lg flex items-center justify-center font-bold text-sm'>
+                      1
+                    </div>
+                    <div>
+                      <h4 className='font-semibold text-gray-900'>
+                        Version Display Fixed
+                      </h4>
+                      <p className='text-sm text-gray-700 mt-1'>
+                        Footer and Quick Customizer toolbar now correctly
+                        display v2.0.1 instead of the old v1.0.0. All version
+                        references throughout the app are now consistent.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className='flex items-start gap-3 p-3 bg-blue-50 rounded-lg'>
+                    <div className='flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-sm'>
+                      2
+                    </div>
+                    <div>
+                      <h4 className='font-semibold text-gray-900'>
+                        Double Loader Fixed
+                      </h4>
+                      <p className='text-sm text-gray-700 mt-1'>
+                        Removed duplicate spinner in the loading screen. Now
+                        shows a single, clean loading animation when the app is
+                        initializing.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className='flex items-start gap-3 p-3 bg-purple-50 rounded-lg'>
+                    <div className='flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm'>
+                      3
+                    </div>
+                    <div>
+                      <h4 className='font-semibold text-gray-900'>
+                        Version Constants Updated
+                      </h4>
+                      <p className='text-sm text-gray-700 mt-1'>
+                        All version constants, package.json, and VERSION file
+                        are now properly synchronized to 2.0.1. This ensures
+                        consistency across the entire application.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* What's Still Included */}
+              <div>
+                <h3 className='text-lg font-bold text-gray-900 mb-3'>
+                  ✨ All Version 2.0.0 Features Still Included
+                </h3>
+                <div className='grid grid-cols-2 gap-3'>
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='text-green-600'>✓</span>
+                    <span>Professional Typography System</span>
+                  </div>
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='text-green-600'>✓</span>
+                    <span>Complete UI/UX Overhaul</span>
+                  </div>
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='text-green-600'>✓</span>
+                    <span>18 Typography Classes</span>
+                  </div>
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='text-green-600'>✓</span>
+                    <span>Accessibility Compliance</span>
+                  </div>
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='text-green-600'>✓</span>
+                    <span>Performance Optimizations</span>
+                  </div>
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='text-green-600'>✓</span>
+                    <span>Dynamic Release Notes</span>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
+
+          {/* Fallback for other versions */}
+          {version !== '1.0.0' &&
+            version !== '2.0.0' &&
+            version !== '2.0.1' && (
+              <div className='text-center py-8'>
+                <div className='mb-4'>
+                  <div className='w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4'>
+                    <svg
+                      className='w-8 h-8 text-gray-400'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth={2}
+                        d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+                      />
+                    </svg>
+                  </div>
+                  <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+                    Release Notes for Version {version}
+                  </h3>
+                  <p className='text-gray-600 mb-4'>
+                    Detailed release notes are available in our documentation.
+                  </p>
+                </div>
+                <div className='bg-gray-50 p-4 rounded-lg'>
+                  <p className='text-sm text-gray-600 mb-3'>
+                    For complete release information, check:
+                  </p>
+                  <div className='space-y-2 text-sm'>
+                    <div className='flex items-center justify-center gap-2'>
+                      <span className='text-blue-600'>📋</span>
+                      <span className='font-medium'>CHANGELOG.md</span>
+                      <span className='text-gray-400'>
+                        - Complete version history
+                      </span>
+                    </div>
+                    <div className='flex items-center justify-center gap-2'>
+                      <span className='text-purple-600'>📚</span>
+                      <span className='font-medium'>docs/RELEASE_NOTES.md</span>
+                      <span className='text-gray-400'>
+                        - Detailed release notes
+                      </span>
+                    </div>
+                    <div className='flex items-center justify-center gap-2'>
+                      <span className='text-green-600'>🌐</span>
+                      <span className='font-medium'>GitHub Releases</span>
+                      <span className='text-gray-400'>
+                        - Official release announcements
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
         </div>
 
         {/* Footer - Always Visible */}
         <div className='border-t bg-gray-50 p-4 flex items-center justify-between flex-shrink-0'>
           <div className='text-sm text-gray-600'>
             Released:{' '}
-            {version === '2.0.0' ? 'January 15, 2025' : 'October 12, 2025'}
+            {version === '2.0.1' || version === '2.0.0'
+              ? 'January 15, 2025'
+              : 'October 12, 2025'}
           </div>
           <button
             onClick={onClose}
