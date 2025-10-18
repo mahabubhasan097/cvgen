@@ -224,13 +224,32 @@ export default function Home() {
           {/* LEFT COLUMN - Controls & Actions */}
           <div className='no-print space-y-6 xl:sticky xl:top-8 pb-4 xl:pb-0'>
             <div className='glass rounded-2xl shadow-2xl p-6 animate-fadeIn'>
-              {/* Hero Section */}
-              <div className='text-center mb-6'>
-                <h1 className='text-4xl font-extrabold text-indigo-600 mb-1'>
+              {/* Modern Hero Section */}
+              <div className='text-center mb-8'>
+                <div className='flex items-center justify-center mb-4'>
+                  <div className='w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg'>
+                    <svg
+                      className='w-7 h-7 text-white'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth={2}
+                        d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <h1 className='text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2'>
                   CVGen
                 </h1>
-                <p className='text-xs text-gray-600 font-medium'>
-                  ✨ Resume Builder for IT Pros ✨
+                <p className='text-sm text-gray-600 font-medium flex items-center justify-center gap-2'>
+                  <span className='w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse'></span>
+                  Professional Resume Builder
+                  <span className='w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse'></span>
                 </p>
               </div>
 
@@ -305,37 +324,41 @@ export default function Home() {
                 )}
               </div>
 
-              {/* Action Buttons */}
-              <div className='space-y-3'>
+              {/* Modern Action Buttons */}
+              <div className='space-y-4'>
                 <button
                   onClick={() => setIsCustomizationOpen(!isCustomizationOpen)}
-                  className='w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 relative'
+                  className='w-full btn btn-primary relative group overflow-hidden'
                 >
-                  <svg
-                    className='w-5 h-5'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
-                    />
-                  </svg>
-                  <span>{isCustomizationOpen ? 'Close' : 'Customize'}</span>
-                  <span className='absolute -top-1 -right-1 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-0.5 rounded-full animate-pulse'>
+                  <div className='flex items-center justify-center gap-3'>
+                    <svg
+                      className='w-5 h-5 transition-transform group-hover:rotate-180'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth={2}
+                        d='M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
+                      />
+                    </svg>
+                    <span className='font-semibold'>
+                      {isCustomizationOpen ? 'Close' : 'Customize'}
+                    </span>
+                  </div>
+                  <div className='absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg animate-pulse'>
                     NEW
-                  </span>
+                  </div>
                 </button>
 
                 <button
                   onClick={handleDownloadPDF}
-                  className='w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200'
+                  className='w-full btn btn-secondary group'
                 >
                   <svg
-                    className='w-5 h-5'
+                    className='w-5 h-5 transition-transform group-hover:scale-110'
                     fill='none'
                     stroke='currentColor'
                     viewBox='0 0 24 24'
@@ -347,17 +370,21 @@ export default function Home() {
                       d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10'
                     />
                   </svg>
-                  <span>Save as PDF</span>
-                  <span className='text-xs opacity-75'>(with links)</span>
+                  <div className='flex flex-col items-start'>
+                    <span className='font-semibold'>Save as PDF</span>
+                    <span className='text-xs opacity-75'>
+                      (with clickable links)
+                    </span>
+                  </div>
                 </button>
 
                 <div className='grid grid-cols-2 gap-3'>
                   <button
                     onClick={handleExport}
-                    className='flex items-center justify-center gap-2 px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200'
+                    className='btn btn-primary group'
                   >
                     <svg
-                      className='w-5 h-5'
+                      className='w-4 h-4 transition-transform group-hover:-translate-y-0.5'
                       fill='none'
                       stroke='currentColor'
                       viewBox='0 0 24 24'
@@ -369,12 +396,12 @@ export default function Home() {
                         d='M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4'
                       />
                     </svg>
-                    <span>Export</span>
+                    <span className='font-medium'>Export</span>
                   </button>
 
-                  <label className='flex items-center justify-center gap-2 px-4 py-3 bg-pink-600 hover:bg-pink-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 cursor-pointer'>
+                  <label className='btn btn-secondary group cursor-pointer'>
                     <svg
-                      className='w-5 h-5'
+                      className='w-4 h-4 transition-transform group-hover:translate-y-0.5'
                       fill='none'
                       stroke='currentColor'
                       viewBox='0 0 24 24'
@@ -386,7 +413,7 @@ export default function Home() {
                         d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12'
                       />
                     </svg>
-                    <span>Import</span>
+                    <span className='font-medium'>Import</span>
                     <input
                       ref={fileInputRef}
                       type='file'
