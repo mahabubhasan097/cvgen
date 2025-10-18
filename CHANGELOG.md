@@ -21,6 +21,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.0.0] - 2025-01-15
+
+### 🎉 Major Release - Typography System & UI/UX Overhaul
+
+This major release introduces a comprehensive typography system and complete UI/UX overhaul, transforming CVGen into a professional-grade resume builder with world-class design standards.
+
+### ✨ Typography System Implementation
+
+#### Typography System
+- **Perfect 1.25 Mathematical Scale** - Professional visual hierarchy
+- **Comprehensive Font Stack** - Inter/Geist with system fallbacks
+- **Typography Hierarchy Classes** - 18 utility classes for consistent styling
+- **Professional Font Weights** - Light (300) to ExtraBold (800)
+- **Optimized Line Heights** - Responsive spacing for readability
+- **Letter Spacing Controls** - Precise character spacing adjustments
+
+#### Typography Classes Added
+- **Display Text**: `.text-display-2xl`, `.text-display-xl`, `.text-display-lg`
+- **Headings**: `.text-heading-3xl` through `.text-heading-sm`
+- **Body Text**: `.text-body-xl` through `.text-body-sm`
+- **Labels**: `.text-label-lg`, `.text-label-base` (uppercase, spaced)
+- **Captions**: `.text-caption-lg`, `.text-caption-base` (muted colors)
+- **Monospace**: `.text-mono-lg`, `.text-mono-base`, `.text-mono-sm`
+
+#### Applied Throughout Application
+- **Main Page**: Hero section with proper heading hierarchy
+- **Template Selector**: Consistent typography across all elements
+- **Customization Sidebar**: Professional text styling
+- **Loading States**: Proper text sizing and spacing
+
+#### Bug Fixes
+- **Category Filter Overflow**: Fixed text overflow in template category chips
+- **Responsive Typography**: Adjusted text sizes for mobile optimization
+- **Consistent Spacing**: Improved spacing across all components
+
+#### Documentation
+- **New Typography Guide**: Complete documentation of typography system
+- **Updated README**: Added typography system information
+- **Implementation Examples**: CSS code examples and usage guidelines
+
+#### UI/UX Overhaul
+- **Design System Foundation**: Comprehensive design tokens and variables
+- **Component Redesign**: Modern, professional aesthetics across all components
+- **Template Selector**: Completely redesigned with clean, minimal layout
+- **Customization Sidebar**: Enhanced with better organization and typography
+- **Visual Polish**: Professional animations and micro-interactions
+- **Responsive Design**: Optimized for all screen sizes and devices
+
+#### Major Improvements
+- **Professional Typography**: Mathematical scale system for perfect hierarchy
+- **Modern UI Components**: Clean, organized, and user-friendly interfaces
+- **Enhanced User Experience**: Intuitive navigation and better visual feedback
+- **Performance Optimized**: Efficient rendering and smooth animations
+- **Accessibility Compliant**: WCAG 2.1 standards with proper contrast ratios
+
+---
+
 ## [1.0.0] - 2025-10-12
 
 ### 🎉 Major Release - Advanced Customization System

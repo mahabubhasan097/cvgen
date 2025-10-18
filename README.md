@@ -61,6 +61,8 @@ A modern, production-grade resume builder with powerful customization features. 
 - **Font Sizes**: Adjustable name (24-40px), headings (14-24px), body (10-16px)
 - **Spacing Controls**: Section spacing, line height, letter spacing, page margins
 - **Font Family**: 7 ATS-safe fonts (Inter, Arial, Helvetica, Calibri, Georgia, Times New Roman, Verdana)
+- **Typography System**: Perfect 1.25 mathematical scale for visual hierarchy
+- **Professional Font Stack**: Inter/Geist with system fallbacks for optimal performance
 
 #### Colors & Themes
 - **5 Built-in Themes**: Classic Black, Professional Blue, Modern Purple, Tech Green, Executive Gray
@@ -287,6 +289,7 @@ See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed instructions.
 
 - **[Templates Guide](docs/TEMPLATES.md)** - Complete guide to all 6 professional templates
 - **[Features](docs/FEATURES.md)** - Complete feature guide
+- **[Typography System](docs/TYPOGRAPHY_SYSTEM.md)** - Professional typography system documentation
 - **[Quick Start](docs/QUICK_START.md)** - Get started in 2 minutes
 - **[Get Started](docs/GET_STARTED.md)** - Detailed setup guide
 - **[Project Structure](docs/PROJECT_STRUCTURE.md)** - Architecture overview
@@ -298,7 +301,7 @@ See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed instructions.
 
 CVGen follows [Semantic Versioning](https://semver.org/). See [CHANGELOG.md](CHANGELOG.md) for version history.
 
-**Current Version**: 1.0.0  
+**Current Version**: 2.0.0  
 **Latest Release**: [Release Notes](docs/RELEASE_NOTES.md)  
 
 ### Version in UI

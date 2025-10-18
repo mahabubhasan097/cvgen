@@ -32,8 +32,6 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
       ? templates
       : templates.filter(t => t.category === selectedCategory);
 
-  // Get current template info
-  const currentTemplateInfo = templates.find(t => t.id === currentTemplate);
 
   return (
     <div className='space-y-4'>
