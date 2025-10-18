@@ -42,86 +42,119 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
 
   return (
     <>
-      {/* Toggle Button */}
+      {/* Modern Toggle Button */}
       <button
         onClick={onToggle}
-        className='fixed right-4 top-4 z-40 p-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg transition-all no-print'
+        className='fixed right-6 top-6 z-40 p-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 no-print group'
         title={isOpen ? 'Close Customization' : 'Open Customization'}
       >
-        <svg
-          className='w-6 h-6'
-          fill='none'
-          stroke='currentColor'
-          viewBox='0 0 24 24'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-            d='M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
-          />
-        </svg>
+        <div className='flex items-center gap-3'>
+          <div className='w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center group-hover:rotate-180 transition-transform duration-300'>
+            <svg
+              className='w-4 h-4'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
+              />
+            </svg>
+          </div>
+          <span className='font-semibold text-sm hidden sm:block'>
+            {isOpen ? 'Close' : 'Customize'}
+          </span>
+        </div>
       </button>
 
-      {/* Sidebar Panel */}
+      {/* Modern Sidebar Panel */}
       <div
-        className={`fixed right-0 top-0 h-screen w-96 bg-white shadow-2xl transform transition-transform duration-300 z-30 no-print ${
+        className={`fixed right-0 top-0 h-screen w-96 bg-white shadow-2xl transform transition-all duration-300 z-30 no-print ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className='h-full flex flex-col'>
-          {/* Header */}
-          <div className='p-6 bg-indigo-600 text-white'>
-            <h2 className='text-xl font-bold mb-1'>Customize</h2>
-            <p className='text-xs text-white/80'>Live preview as you change</p>
+          {/* Modern Header */}
+          <div className='p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white relative overflow-hidden'>
+            <div className='absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16'></div>
+            <div className='absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12'></div>
+            <div className='relative z-10'>
+              <div className='flex items-center gap-3 mb-3'>
+                <div className='w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center'>
+                  <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z' />
+                  </svg>
+                </div>
+                <h2 className='text-xl font-bold'>Customize</h2>
+              </div>
+              <p className='text-sm text-white/90 flex items-center gap-2'>
+                <span className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></span>
+                Live preview as you change
+              </p>
+            </div>
           </div>
 
-          {/* Tabs */}
-          <div className='flex border-b bg-gray-50'>
+          {/* Modern Tabs */}
+          <div className='flex border-b bg-gray-50 px-2'>
             <button
               onClick={() => setActiveTab('templates')}
-              className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+              className={`flex-1 px-3 py-3 text-sm font-semibold transition-all duration-200 rounded-t-xl relative ${
                 activeTab === 'templates'
-                  ? 'bg-white text-indigo-600 border-b-2 border-indigo-600'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-blue-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              Templates
+              <div className='flex items-center justify-center gap-2'>
+                <span className='text-base'>🎨</span>
+                <span>Templates</span>
+              </div>
             </button>
             <button
               onClick={() => setActiveTab('quick')}
-              className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+              className={`flex-1 px-3 py-3 text-sm font-semibold transition-all duration-200 rounded-t-xl ${
                 activeTab === 'quick'
-                  ? 'bg-white text-indigo-600 border-b-2 border-indigo-600'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-blue-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              Quick
+              <div className='flex items-center justify-center gap-2'>
+                <span className='text-base'>⚡</span>
+                <span>Quick</span>
+              </div>
             </button>
             <button
               onClick={() => setActiveTab('advanced')}
-              className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+              className={`flex-1 px-3 py-3 text-sm font-semibold transition-all duration-200 rounded-t-xl ${
                 activeTab === 'advanced'
-                  ? 'bg-white text-indigo-600 border-b-2 border-indigo-600'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-blue-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              Advanced
+              <div className='flex items-center justify-center gap-2'>
+                <span className='text-base'>⚙️</span>
+                <span>Advanced</span>
+              </div>
             </button>
             <button
               onClick={() => setActiveTab('sections')}
-              className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+              className={`flex-1 px-3 py-3 text-sm font-semibold transition-all duration-200 rounded-t-xl ${
                 activeTab === 'sections'
-                  ? 'bg-white text-indigo-600 border-b-2 border-indigo-600'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-blue-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              Sections
+              <div className='flex items-center justify-center gap-2'>
+                <span className='text-base'>📋</span>
+                <span>Sections</span>
+              </div>
             </button>
           </div>
 
-          {/* Content */}
-          <div className='flex-1 overflow-y-auto p-6 space-y-6'>
+          {/* Modern Content */}
+          <div className='flex-1 overflow-y-auto p-6 space-y-8 bg-gray-50/50'>
             {/* Templates Tab */}
             {activeTab === 'templates' && (
               <TemplateSelector
@@ -137,40 +170,57 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
               />
             )}
 
-            {/* Quick Tab */}
+            {/* Modern Quick Tab */}
             {activeTab === 'quick' && (
-              <>
-                {/* Presets */}
-                <div>
-                  <h3 className='text-sm font-bold mb-3 text-gray-900'>
-                    Layout Presets
-                  </h3>
-                  <div className='grid grid-cols-3 gap-2'>
+              <div className='space-y-8'>
+                {/* Modern Presets */}
+                <div className='card p-6'>
+                  <div className='flex items-center gap-3 mb-4'>
+                    <div className='w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center'>
+                      <span className='text-white text-sm'>📄</span>
+                    </div>
+                    <h3 className='text-lg font-bold text-gray-900'>
+                      Layout Presets
+                    </h3>
+                  </div>
+                  <div className='grid grid-cols-3 gap-3'>
                     {(['compact', 'normal', 'spacious'] as const).map(
                       preset => (
                         <button
                           key={preset}
                           onClick={() => applyPreset(preset)}
-                          className={`p-3 rounded-lg border-2 capitalize text-xs font-semibold transition-all ${
+                          className={`p-4 rounded-xl border-2 capitalize text-sm font-semibold transition-all duration-200 ${
                             settings.preset === preset
-                              ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
-                              : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                              ? 'border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 shadow-md transform scale-105'
+                              : 'border-gray-200 hover:border-blue-300 hover:shadow-sm text-gray-700 bg-white'
                           }`}
                         >
-                          {preset}
+                          <div className='text-center'>
+                            <div className='text-2xl mb-2'>
+                              {preset === 'compact' && '📄'}
+                              {preset === 'normal' && '📃'}
+                              {preset === 'spacious' && '📰'}
+                            </div>
+                            <span>{preset}</span>
+                          </div>
                         </button>
                       )
                     )}
                   </div>
                 </div>
 
-                {/* Themes */}
-                <div>
-                  <h3 className='text-sm font-bold mb-3 text-gray-900'>
-                    Color Theme
-                  </h3>
+                {/* Modern Themes */}
+                <div className='card p-6'>
+                  <div className='flex items-center gap-3 mb-4'>
+                    <div className='w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center'>
+                      <span className='text-white text-sm'>🎨</span>
+                    </div>
+                    <h3 className='text-lg font-bold text-gray-900'>
+                      Color Theme
+                    </h3>
+                  </div>
                   <div className='max-h-80 overflow-y-auto pr-2'>
-                    <div className='grid grid-cols-2 gap-2'>
+                    <div className='grid grid-cols-1 gap-3'>
                       {DEFAULT_THEMES.map(theme => (
                         <button
                           key={theme.name}
@@ -186,19 +236,37 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                               accentColor: newAccentColor,
                             });
                           }}
-                          className={`p-2 rounded-lg border-2 transition-all flex flex-col items-center gap-2 hover:scale-105 ${
+                          className={`p-4 rounded-xl border-2 transition-all duration-200 ${
                             settings.theme.name === theme.name
-                              ? 'border-indigo-600 bg-indigo-50 shadow-md'
-                              : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                              ? 'border-purple-500 bg-gradient-to-r from-purple-50 to-pink-50 shadow-md'
+                              : 'border-gray-200 hover:border-purple-300 hover:shadow-sm bg-white'
                           }`}
                         >
-                          <div
-                            className='w-8 h-8 rounded-full shadow-sm'
-                            style={{ backgroundColor: theme.primary }}
-                          />
-                          <span className='text-xs font-medium text-center leading-tight'>
-                            {theme.name}
-                          </span>
+                          <div className='flex items-center gap-3'>
+                            <div className='flex items-center gap-2'>
+                              <div
+                                className='w-6 h-6 rounded-full border-2 border-white shadow-sm'
+                                style={{ backgroundColor: theme.primary }}
+                              />
+                              <div className='text-left'>
+                                <span className='text-sm font-semibold text-gray-900 block'>
+                                  {theme.name}
+                                </span>
+                                <p className='text-xs text-gray-600'>
+                                  {theme.description}
+                                </p>
+                              </div>
+                            </div>
+                            {settings.theme.name === theme.name && (
+                              <div className='ml-auto'>
+                                <div className='w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center'>
+                                  <svg className='w-3 h-3 text-white' fill='currentColor' viewBox='0 0 20 20'>
+                                    <path fillRule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clipRule='evenodd' />
+                                  </svg>
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         </button>
                       ))}
                     </div>
