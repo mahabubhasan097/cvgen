@@ -84,8 +84,18 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
             <div className='relative z-10'>
               <div className='flex items-center gap-3 mb-3'>
                 <div className='w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center animate-float'>
-                  <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z' />
+                  <svg
+                    className='w-5 h-5'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z'
+                    />
                   </svg>
                 </div>
                 <h2 className='text-xl font-bold'>Customize</h2>
@@ -101,54 +111,54 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
           <div className='flex border-b bg-gray-50 px-2'>
             <button
               onClick={() => setActiveTab('templates')}
-              className={`flex-1 px-3 py-3 text-sm font-semibold transition-all duration-200 rounded-t-xl relative ${
+              className={`flex-1 px-2 py-2 text-sm font-semibold transition-all duration-200 rounded-t-xl relative ${
                 activeTab === 'templates'
                   ? 'bg-white text-blue-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              <div className='flex items-center justify-center gap-2'>
-                <span className='text-base'>🎨</span>
-                <span>Templates</span>
+              <div className='flex items-center justify-center gap-1'>
+                <span className='text-sm'>🎨</span>
+                <span className='text-xs'>Templates</span>
               </div>
             </button>
             <button
               onClick={() => setActiveTab('quick')}
-              className={`flex-1 px-3 py-3 text-sm font-semibold transition-all duration-200 rounded-t-xl ${
+              className={`flex-1 px-2 py-2 text-sm font-semibold transition-all duration-200 rounded-t-xl ${
                 activeTab === 'quick'
                   ? 'bg-white text-blue-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              <div className='flex items-center justify-center gap-2'>
-                <span className='text-base'>⚡</span>
-                <span>Quick</span>
+              <div className='flex items-center justify-center gap-1'>
+                <span className='text-sm'>⚡</span>
+                <span className='text-xs'>Quick</span>
               </div>
             </button>
             <button
               onClick={() => setActiveTab('advanced')}
-              className={`flex-1 px-3 py-3 text-sm font-semibold transition-all duration-200 rounded-t-xl ${
+              className={`flex-1 px-2 py-2 text-sm font-semibold transition-all duration-200 rounded-t-xl ${
                 activeTab === 'advanced'
                   ? 'bg-white text-blue-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              <div className='flex items-center justify-center gap-2'>
-                <span className='text-base'>⚙️</span>
-                <span>Advanced</span>
+              <div className='flex items-center justify-center gap-1'>
+                <span className='text-sm'>⚙️</span>
+                <span className='text-xs'>Advanced</span>
               </div>
             </button>
             <button
               onClick={() => setActiveTab('sections')}
-              className={`flex-1 px-3 py-3 text-sm font-semibold transition-all duration-200 rounded-t-xl ${
+              className={`flex-1 px-2 py-2 text-sm font-semibold transition-all duration-200 rounded-t-xl ${
                 activeTab === 'sections'
                   ? 'bg-white text-blue-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              <div className='flex items-center justify-center gap-2'>
-                <span className='text-base'>📋</span>
-                <span>Sections</span>
+              <div className='flex items-center justify-center gap-1'>
+                <span className='text-sm'>📋</span>
+                <span className='text-xs'>Sections</span>
               </div>
             </button>
           </div>
@@ -253,15 +263,23 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                                   {theme.name}
                                 </span>
                                 <p className='text-xs text-gray-600'>
-                                  {theme.description}
+                                  {theme.name} theme
                                 </p>
                               </div>
                             </div>
                             {settings.theme.name === theme.name && (
                               <div className='ml-auto'>
                                 <div className='w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center'>
-                                  <svg className='w-3 h-3 text-white' fill='currentColor' viewBox='0 0 20 20'>
-                                    <path fillRule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clipRule='evenodd' />
+                                  <svg
+                                    className='w-3 h-3 text-white'
+                                    fill='currentColor'
+                                    viewBox='0 0 20 20'
+                                  >
+                                    <path
+                                      fillRule='evenodd'
+                                      d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z'
+                                      clipRule='evenodd'
+                                    />
                                   </svg>
                                 </div>
                               </div>
@@ -473,12 +491,12 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                       : 'Reset to theme color'}
                   </button>
                 </div>
-              </>
+              </div>
             )}
 
             {/* Advanced Tab */}
             {activeTab === 'advanced' && (
-              <>
+              <div className='space-y-6'>
                 {/* Font Sizes */}
                 <div>
                   <h3 className='text-sm font-bold mb-3 text-gray-900'>
@@ -849,7 +867,7 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                     />
                   </div>
                 )}
-              </>
+              </div>
             )}
 
             {/* Sections Tab */}
