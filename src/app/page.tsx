@@ -214,10 +214,10 @@ export default function Home() {
             <div className='inline-block animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent absolute top-0 left-0'></div>
           </div>
           <div className='mt-6'>
-            <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+            <h3 className='text-heading-lg text-gray-800 mb-2'>
               Loading CVGen
             </h3>
-            <p className='text-sm text-gray-600 animate-pulse'>
+            <p className='text-body-sm text-gray-600 animate-pulse'>
               Preparing your professional resume builder...
             </p>
           </div>
@@ -253,10 +253,10 @@ export default function Home() {
                     </svg>
                   </div>
                 </div>
-                <h1 className='text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2'>
+                <h1 className='text-display-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2'>
                   CVGen
                 </h1>
-                <p className='text-sm text-gray-600 font-medium flex items-center justify-center gap-2'>
+                <p className='text-caption-lg font-medium flex items-center justify-center gap-2'>
                   <span className='w-1.5 h-1.5 bg-blue-500 rounded-full animate-heartbeat'></span>
                   Professional Resume Builder
                   <span className='w-1.5 h-1.5 bg-purple-500 rounded-full animate-heartbeat animation-delay-2000'></span>
@@ -436,7 +436,7 @@ export default function Home() {
 
                 {/* Reset Options */}
                 <div className='space-y-3'>
-                  <h4 className='text-sm font-bold text-gray-700 text-center'>
+                  <h4 className='text-heading-sm text-gray-700 text-center'>
                     Reset Options
                   </h4>
 
@@ -530,10 +530,10 @@ export default function Home() {
                   </div>
                 </div>
                 <div className='flex-1'>
-                  <h3 className='font-bold text-base text-gray-900 mb-3'>
+                  <h3 className='text-heading-base text-gray-900 mb-3'>
                     💡 ATS Tips
                   </h3>
-                  <ul className='space-y-2 text-sm text-gray-700'>
+                  <ul className='space-y-2 text-body-sm text-gray-700'>
                     <li className='flex items-start gap-2'>
                       <span className='text-green-600 mt-0.5'>✓</span>
                       <span>Simple formatting</span>
@@ -557,10 +557,10 @@ export default function Home() {
 
             {/* Footer - in left column */}
             <div className='bg-gray-800 rounded-2xl p-6 text-center'>
-              <p className='text-white font-medium mb-2 text-base'>
+              <p className='text-white font-medium mb-2 text-body-base'>
                 ✨ Built for IT Professionals ✨
               </p>
-              <p className='text-gray-300 text-xs'>
+              <p className='text-gray-300 text-caption-base'>
                 Next.js 15 • ATS-Optimized • Free Forever
               </p>
               <div className='flex flex-wrap justify-center gap-3 mt-4 text-xs text-gray-400'>

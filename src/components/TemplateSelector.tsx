@@ -39,10 +39,8 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     <div className='space-y-4'>
       {/* Clean Header */}
       <div>
-        <h3 className='text-base font-semibold text-gray-900 mb-1'>
-          Templates
-        </h3>
-        <p className='text-sm text-gray-500'>Choose a template design</p>
+        <h3 className='text-heading-base text-gray-900 mb-1'>Templates</h3>
+        <p className='text-body-sm text-gray-500'>Choose a template design</p>
       </div>
 
       {/* 2x3 Category Filter Grid */}
@@ -80,13 +78,15 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
           >
             <div className='flex items-center justify-between'>
               <div>
-                <h4 className='font-medium text-gray-900'>{template.name}</h4>
-                <p className='text-sm text-gray-500 mt-0.5'>
+                <h4 className='text-heading-sm text-gray-900'>
+                  {template.name}
+                </h4>
+                <p className='text-body-sm text-gray-500 mt-0.5'>
                   {template.description}
                 </p>
               </div>
               {currentTemplate === template.id && (
-                <div className='text-blue-600 font-medium text-sm'>
+                <div className='text-blue-600 font-medium text-body-sm'>
                   Selected
                 </div>
               )}

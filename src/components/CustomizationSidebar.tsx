@@ -98,9 +98,9 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
                     />
                   </svg>
                 </div>
-                <h2 className='text-xl font-bold'>Customize</h2>
+                <h2 className='text-heading-xl'>Customize</h2>
               </div>
-              <p className='text-sm text-white/90 flex items-center gap-2'>
+              <p className='text-body-sm text-white/90 flex items-center gap-2'>
                 <span className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></span>
                 Live preview as you change
               </p>
