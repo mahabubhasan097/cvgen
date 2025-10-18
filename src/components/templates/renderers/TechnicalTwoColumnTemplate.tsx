@@ -49,7 +49,10 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
       date: 'Date',
     };
     onUpdate &&
-      onUpdate({ ...data, certifications: [...data.certifications, newCert] });
+      onUpdate({
+        ...data,
+        certifications: [...(data.certifications || []), newCert],
+      });
   };
 
   const removeCertification = (index: number) => {
@@ -57,7 +60,6 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
     const newCerts = data.certifications.filter((_, i) => i !== index);
     onUpdate && onUpdate({ ...data, certifications: newCerts });
   };
-
 
   return (
     <div
@@ -103,14 +105,20 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
           <EditableField
             value={data.contact.email}
             onChange={value =>
-              onUpdate?.({ ...data, contact: { ...data.contact, email: value } })
+              onUpdate?.({
+                ...data,
+                contact: { ...data.contact, email: value },
+              })
             }
             placeholder='Email'
           />
           <EditableField
             value={data.contact.phone}
             onChange={value =>
-              onUpdate?.({ ...data, contact: { ...data.contact, phone: value } })
+              onUpdate?.({
+                ...data,
+                contact: { ...data.contact, phone: value },
+              })
             }
             placeholder='Phone'
           />
@@ -267,7 +275,8 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
           {/* Certifications - Sidebar */}
           {customization.sections.find(s => s.id === 'certifications')
             ?.visible &&
-            data.certifications && data.certifications.length > 0 && (
+            data.certifications &&
+            data.certifications.length > 0 && (
               <div>
                 <h2
                   className='font-bold uppercase tracking-wider border-b-2 mb-4'
@@ -296,6 +305,7 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
                             <EditableField
                               value={cert.name}
                               onChange={value => {
+                                if (!data.certifications) return;
                                 const newCerts = [...data.certifications];
                                 newCerts[index] = {
                                   ...newCerts[index],
@@ -322,6 +332,7 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
                             <EditableField
                               value={cert.issuer}
                               onChange={value => {
+                                if (!data.certifications) return;
                                 const newCerts = [...data.certifications];
                                 newCerts[index] = {
                                   ...newCerts[index],
@@ -348,6 +359,7 @@ const TechnicalTwoColumnTemplate: React.FC<TemplateRendererProps> = props => {
                             <EditableField
                               value={cert.date}
                               onChange={value => {
+                                if (!data.certifications) return;
                                 const newCerts = [...data.certifications];
                                 newCerts[index] = {
                                   ...newCerts[index],

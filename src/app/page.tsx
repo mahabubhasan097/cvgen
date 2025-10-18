@@ -142,6 +142,7 @@ export default function Home() {
       const timer = setTimeout(() => setShowSaveNotification(false), 2000);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [resumeData, customization, isMounted]);
 
   // Print functionality available via PDF generation

@@ -122,7 +122,10 @@ export const renderSections = ({
       date: 'Month Year',
     };
     onUpdate &&
-      onUpdate({ ...data, certifications: [...(data.certifications || []), newCert] });
+      onUpdate({
+        ...data,
+        certifications: [...(data.certifications || []), newCert],
+      });
   };
 
   const removeCertification = (index: number) => {
@@ -138,7 +141,8 @@ export const renderSections = ({
       description: 'Project description...',
       technologies: ['Technology 1', 'Technology 2'],
     };
-    onUpdate && onUpdate({ ...data, projects: [...(data.projects || []), newProject] });
+    onUpdate &&
+      onUpdate({ ...data, projects: [...(data.projects || []), newProject] });
   };
 
   const removeProject = (index: number) => {
@@ -740,7 +744,7 @@ export const renderSections = ({
     return (
       <div style={{ marginBottom: `${customization.spacing.section}px` }}>
         {renderSectionHeader('CERTIFICATIONS')}
-        {(!data.certifications || data.certifications.length === 0) ? (
+        {!data.certifications || data.certifications.length === 0 ? (
           isEditable && (
             <p
               className='text-gray-500 italic'
@@ -865,7 +869,7 @@ export const renderSections = ({
     return (
       <div style={{ marginBottom: `${customization.spacing.section}px` }}>
         {renderSectionHeader('PROJECTS')}
-        {(!data.projects || data.projects.length === 0) ? (
+        {!data.projects || data.projects.length === 0 ? (
           isEditable && (
             <p
               className='text-gray-500 italic'
