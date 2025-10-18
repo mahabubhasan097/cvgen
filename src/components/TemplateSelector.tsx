@@ -32,7 +32,6 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
       ? templates
       : templates.filter(t => t.category === selectedCategory);
 
-
   return (
     <div className='space-y-4'>
       {/* Clean Header */}
