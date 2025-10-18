@@ -2,6 +2,7 @@ import { ResumeData } from '@/types/resume';
 import {
   CustomizationSettings,
   DEFAULT_CUSTOMIZATION,
+  getCustomizationForTemplate,
 } from '@/types/customization';
 import { logger } from './logger';
 
@@ -91,29 +92,34 @@ export const loadCustomizationFromStorage =
 
       const savedSettings = JSON.parse(data);
 
-      // Merge with defaults to ensure all new properties exist (backward compatibility)
+      // Get template-specific customization
+      const templateId = savedSettings.template || 'professional-standard';
+      const templateCustomization = getCustomizationForTemplate(templateId);
+
+      // Merge with template-specific settings to ensure all new properties exist (backward compatibility)
       const merged = {
-        ...DEFAULT_CUSTOMIZATION,
+        ...templateCustomization,
         ...savedSettings,
         fontSize: {
-          ...DEFAULT_CUSTOMIZATION.fontSize,
+          ...templateCustomization.fontSize,
           ...savedSettings.fontSize,
         },
-        spacing: { ...DEFAULT_CUSTOMIZATION.spacing, ...savedSettings.spacing },
+        spacing: { ...templateCustomization.spacing, ...savedSettings.spacing },
         lineHeight: {
-          ...DEFAULT_CUSTOMIZATION.lineHeight,
+          ...templateCustomization.lineHeight,
           ...savedSettings.lineHeight,
         },
         theme: {
-          ...DEFAULT_CUSTOMIZATION.theme,
+          ...templateCustomization.theme,
           ...savedSettings.theme,
           // Ensure extended colors exist (new in v1.0.0+)
           colors: {
-            ...DEFAULT_CUSTOMIZATION.theme.colors,
+            ...templateCustomization.theme.colors,
             ...savedSettings.theme?.colors,
           },
         },
-        sections: savedSettings.sections || DEFAULT_CUSTOMIZATION.sections,
+        // Ensure sections are template-specific
+        sections: templateCustomization.sections,
       };
 
       return merged;
@@ -122,3 +128,20 @@ export const loadCustomizationFromStorage =
       return null;
     }
   };
+
+/**
+ * Update customization settings when template changes
+ * This ensures sections are updated to match the new template
+ */
+export const updateCustomizationForTemplate = (
+  currentSettings: CustomizationSettings,
+  newTemplateId: string
+): CustomizationSettings => {
+  const templateCustomization = getCustomizationForTemplate(newTemplateId);
+
+  return {
+    ...currentSettings,
+    template: newTemplateId,
+    sections: templateCustomization.sections,
+  };
+};

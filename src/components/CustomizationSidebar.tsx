@@ -9,6 +9,7 @@ import {
 } from '@/types/customization';
 import TemplateSelector from './TemplateSelector';
 import { useTemplateEngine } from './templates/TemplateEngine';
+import { updateCustomizationForTemplate } from '@/utils/storage';
 
 interface CustomizationSidebarProps {
   settings: CustomizationSettings;
@@ -126,9 +127,13 @@ const CustomizationSidebar: React.FC<CustomizationSidebarProps> = ({
               <TemplateSelector
                 templates={templateEngine.getAvailableTemplates()}
                 currentTemplate={settings.template}
-                onTemplateChange={templateId =>
-                  onUpdate({ ...settings, template: templateId })
-                }
+                onTemplateChange={templateId => {
+                  const updatedSettings = updateCustomizationForTemplate(
+                    settings,
+                    templateId
+                  );
+                  onUpdate(updatedSettings);
+                }}
               />
             )}
 
